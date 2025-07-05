@@ -28,7 +28,7 @@ const Title: React.FC<TitleProps> = ({
   // Mapeamento de tamanhos
   const sizeClasses = {
     sm: 'text-2xl', // 24px
-    md: 'text-3xl', // 30px
+    md: 'text-[32px]', // 32px
     lg: 'text-4xl', // 36px
     xl: 'text-5xl' // 48px
   }

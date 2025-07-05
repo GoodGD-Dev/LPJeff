@@ -7,7 +7,7 @@ interface TextProps {
   bulletColor?: string
   uppercase?: boolean
   lowercase?: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   align?: 'left' | 'center' | 'right'
   expanded?: boolean
   className?: string
@@ -27,6 +27,7 @@ const Text: React.FC<TextProps> = ({
 }) => {
   // Mapeamento de tamanhos
   const sizeClasses = {
+    xs: 'text-xs', // 12px
     sm: 'text-sm', // 14px
     md: 'text-base', // 16px (padrão)
     lg: 'text-lg', // 18px

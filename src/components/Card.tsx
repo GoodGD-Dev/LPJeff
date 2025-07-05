@@ -1,10 +1,11 @@
 import React from 'react'
-import Title from '@ui/Title' // Importe seus componentes
+import Title from '@ui/Title'
 import Text from '@ui/Text'
 
 interface CardProps {
   icon?: React.ReactNode
   title: string
+  text?: string | React.ReactNode
   listItems?: string[]
   description?: string | React.ReactNode
   children?: React.ReactNode
@@ -15,6 +16,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({
   icon,
   title,
+  text,
   listItems = [],
   description,
   children,
@@ -43,10 +45,11 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`border rounded-2xl p-8 space-y-6 ${className}`}
+      className={`border rounded-2xl p-8 space-y-6
+        w-full max-w-[343px] min-h-[280px]
+        sm:w-[343px]
+        ${className}`}
       style={{
-        width: '343px',
-        minHeight: '280px',
         backgroundColor: currentVariant.cardBg,
         borderColor: currentVariant.cardBorder
       }}
@@ -68,22 +71,31 @@ const Card: React.FC<CardProps> = ({
         {title}
       </Title>
 
-      {/* Lista de itens usando componente Text */}
-      {listItems.length > 0 && (
-        <ul className="space-y-2">
-          {listItems.map((item, index) => (
-            <Text
-              key={index}
-              as="li"
-              color={currentVariant.textColor}
-              bulletColor={currentVariant.textColor}
-              align="left"
-            >
-              {item}
-            </Text>
-          ))}
-        </ul>
-      )}
+      {/* Text */}
+      <div className="space-y-2">
+        {text && (
+          <Text as="p" align="left" color={currentVariant.textColor}>
+            {text}
+          </Text>
+        )}
+
+        {/* Lista de itens usando componente Text */}
+        {listItems.length > 0 && (
+          <ul className="space-y-2">
+            {listItems.map((item, index) => (
+              <Text
+                key={index}
+                as="li"
+                color={currentVariant.textColor}
+                bulletColor={currentVariant.textColor}
+                align="left"
+              >
+                {item}
+              </Text>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {/* Descrição usando componente Text */}
       {description && (
@@ -108,8 +120,9 @@ PROPS OBRIGATÓRIAS:
 
 PROPS OPCIONAIS:
 - icon?: React.ReactNode - SVG decorativo no topo esquerdo
+- text?: string | React.ReactNode - Texto após o título (sem gap)
 - listItems?: string[] - Array de itens para lista
-- description?: string - Parágrafo de descrição
+- description?: string | React.ReactNode - Parágrafo de descrição
 - children?: React.ReactNode - Conteúdo customizado
 - className?: string - Classes CSS extras
 - variant?: 'dark' | 'light' - Variação de cores (padrão: 'dark')
@@ -128,33 +141,37 @@ LIGHT:
 
 EXEMPLOS:
 
-// Card dark (padrão)
-<Card title="Card Escuro" />
-
-// Card light
+// Card com texto após título
 <Card
-  title="Card Claro"
-  variant="light"
+  title="Título Principal"
+  text="Este texto aparece logo após o título, sem gap entre eles"
 />
 
-// Card completo dark
+// Card completo com todas as props
 <Card
   icon={<svg>...</svg>}
   title="Card Completo"
-  variant="dark"
+  text="Texto explicativo do card"
   listItems={[
     "Primeiro item",
     "Segundo item",
     "Terceiro item"
   ]}
-  description="Descrição final"
+  description="Descrição final do card"
+  variant="dark"
 />
 
-// Card light com conteúdo customizado
+// Card light com texto
 <Card
-  title="Card Personalizado"
+  title="Card Claro"
+  text="Texto no card claro"
   variant="light"
->
-  <div>Conteúdo customizado</div>
-</Card>
+/>
+
+// Ordem dos elementos:
+// 1. Ícone (se houver)
+// 2. Título
+// 3. Texto + Lista (sem gap entre eles)
+// 4. Descrição (se houver)
+// 5. Children (se houver)
 */
