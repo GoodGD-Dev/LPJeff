@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({
         <img
           src={heroImage}
           alt="Imagem hero"
-          className="w-full max-w-md h-64 object-cover rounded-lg shadow-lg"
+          className="w-full max-w-md h-64 object-cover rounded-lg"
         />
       </div>
 
