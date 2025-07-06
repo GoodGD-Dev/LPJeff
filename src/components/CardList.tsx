@@ -22,15 +22,14 @@ const CardList: React.FC<CardListProps> = ({ items, className = '' }) => {
       {/* Lista de itens */}
       <ul className="space-y-6">
         {items.map((item) => (
-          <li key={item.id} className="flex items-center gap-4">
+          <li key={item.id} className="flex items-start gap-4">
             {/* Ícone SVG */}
-            <div className="text-white w-4 h-4 flex-shrink-0">{item.icon}</div>
-
+            <div className="w-8 flex-shrink-0 pt-1.5">{item.icon}</div>
             {/* Texto */}
             <span
-              className="font-mosvita text-base font-medium leading-normal tracking-normal"
+              className="font-mosvita text-base font-medium leading-normal tracking-normal whitespace-pre-line"
               style={{
-                color: 'rgba(255, 255, 255, 0.6)' // Branco 60% transparência
+                color: 'rgba(255, 255, 255, 0.6)'
               }}
             >
               {item.text}
