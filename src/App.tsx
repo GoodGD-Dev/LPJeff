@@ -7,6 +7,7 @@ import BrandIntentionSection from './sections/BrandSection'
 import VideoCarouselSection from './sections/VideoCarouselSection'
 import ImageCarousel from '@components/ImageCarousel'
 import ImageCarouselSection from './sections/ImageCarouselSection'
+import ChooseSection from './sections/ChooseSection'
 
 const heroImage = imgHero
 const statsImage = logosImage
@@ -176,6 +177,7 @@ function App() {
       <BrandIntentionSection />
       <VideoCarouselSection videos={VIDEOS} />
       <ImageCarouselSection carousels={carouselData} title="Test" />
+      <ChooseSection />
     </>
   )
 }
