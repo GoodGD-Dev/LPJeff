@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import VideoPlayer from '@ui/VideoModal'
@@ -10,73 +10,65 @@ interface Video {
   title?: string
 }
 
-// Remova a constante VIDEOS daqui. Ela será passada como prop.
-
 interface VideoCarouselModalProps {
-  videos: Video[] // Mude o nome da prop de 'infos' para 'videos' e defina o tipo.
+  videos: Video[]
+}
+
+interface VideoStatus {
+  loading: boolean
+  error: boolean
 }
 
 const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
-  // Receba 'videos' como prop
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0)
-
-  // Inicialize videoStatus com base nos vídeos passados como prop
-  const [videoStatus, setVideoStatus] = useState<
-    Record<number, { loading: boolean; error: boolean }>
-  >(
-    videos.reduce(
-      // Use 'videos' (a prop) aqui
-      (acc, video) => ({
-        ...acc,
-        [video.id]: { loading: false, error: false }
-      }),
-      {}
-    )
+  const [videoStatus, setVideoStatus] = useState<Record<number, VideoStatus>>(
+    {}
   )
 
-  const [sliderRef, slider] = useKeenSlider(
-    {
+  // Memoizar configurações do slider para evitar recriações desnecessárias
+  const sliderOptions = useMemo(
+    () => ({
       loop: true,
-      mode: 'snap',
-      renderMode: 'performance',
+      mode: 'snap' as const,
+      renderMode: 'performance' as const,
       dragSpeed: 0.8,
       rubberband: false,
       slides: {
-        perView: 1.35, // Mobile
-        spacing: -120, // Mobile
-        origin: 'center'
+        perView: 1.35,
+        spacing: -120,
+        origin: 'center' as const
       },
       breakpoints: {
         '(min-width: 768px)': {
           slides: {
             perView: 2.2,
             spacing: -160,
-            origin: 'center'
+            origin: 'center' as const
           }
         },
         '(min-width: 1200px)': {
           slides: {
             perView: 2.1,
             spacing: -200,
-            origin: 'center'
+            origin: 'center' as const
           }
         }
       },
       initial: 0,
-      slideChanged(s) {
-        setCurrentSlideIdx(s.track.details.rel)
-      },
-      created(s) {
-        s.emit('slideChanged')
+      slideChanged: (slider: any) => {
+        setCurrentSlideIdx(slider.track.details.rel)
       }
-    },
-    [] // Plugins array permanece vazio
+    }),
+    []
   )
 
+  const [sliderRef, slider] = useKeenSlider(sliderOptions)
+
+  // Handlers otimizados com useCallback
   const handleLoadStart = useCallback((videoId: number) => {
     setVideoStatus((prev) => ({
       ...prev,
-      [videoId]: { ...prev[videoId], loading: true, error: false }
+      [videoId]: { loading: true, error: false }
     }))
   }, [])
 
@@ -90,78 +82,98 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
   const handleError = useCallback((videoId: number) => {
     setVideoStatus((prev) => ({
       ...prev,
-      [videoId]: { ...prev[videoId], loading: false, error: true }
+      [videoId]: { loading: false, error: true }
     }))
     console.error(`Erro ao carregar vídeo com ID: ${videoId}`)
   }, [])
 
+  const handlePrevSlide = useCallback(() => {
+    slider.current?.prev()
+  }, [slider])
+
+  const handleNextSlide = useCallback(() => {
+    slider.current?.next()
+  }, [slider])
+
+  // Componente de navegação extraído para melhor organização
+  const NavigationButtons = () => (
+    <>
+      <button
+        onClick={handlePrevSlide}
+        className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 ml-2 opacity-75 hover:opacity-100 transition-opacity"
+        aria-label="Slide anterior"
+      >
+        &#10094;
+      </button>
+      <button
+        onClick={handleNextSlide}
+        className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 mr-2 opacity-75 hover:opacity-100 transition-opacity"
+        aria-label="Próximo slide"
+      >
+        &#10095;
+      </button>
+    </>
+  )
+
+  // Componente de loading extraído
+  const LoadingSpinner = () => (
+    <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-10 text-white">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-lime-400"></div>
+      <span className="sr-only">Carregando vídeo...</span>
+    </div>
+  )
+
+  // Componente de erro extraído
+  const ErrorMessage = () => (
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-red-800/80 text-white p-4 text-center z-10">
+      <p className="text-lg font-bold mb-2">Erro!</p>
+      <p className="text-sm">Não foi possível carregar o vídeo.</p>
+      <p className="text-xs mt-1">Verifique a URL ou sua conexão.</p>
+    </div>
+  )
+
+  // Função para obter classes de estilo do slide
+  const getSlideClasses = useCallback((isActive: boolean) => {
+    const baseClasses = `
+      w-[240px] h-[440px]
+      md:w-[320px] md:h-[560px]
+      rounded-xl overflow-hidden relative
+      transition-all duration-300 ease-in-out
+      bg-black flex-shrink-0
+    `
+
+    const conditionalClasses = isActive
+      ? 'scale-100 z-30 shadow-2xl'
+      : 'scale-75 z-20 opacity-60 blur-sm will-change-transform transform-gpu'
+
+    return `${baseClasses} ${conditionalClasses}`
+  }, [])
+
   return (
     <div className="relative w-full py-10 px-4">
-      {slider && (
-        <>
-          <button
-            onClick={() => slider.current?.prev()}
-            className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 ml-2 opacity-75 hover:opacity-100 transition-opacity"
-            aria-label="Slide anterior"
-          >
-            &#10094;
-          </button>
-          <button
-            onClick={() => slider.current?.next()}
-            className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 mr-2 opacity-75 hover:opacity-100 transition-opacity"
-            aria-label="Próximo slide"
-          >
-            &#10095;
-          </button>
-        </>
-      )}
+      {slider && <NavigationButtons />}
 
-      <div ref={sliderRef} className="keen-slider w-full">
-        {videos.map((video) => {
-          // Use 'videos' (a prop) aqui
-          const isActive =
-            videos.findIndex((v) => v.id === video.id) === currentSlideIdx // Use 'videos' (a prop) aqui
+      <div ref={sliderRef} className="keen-slider w-full h-auto">
+        {videos.map((video, index) => {
+          const isActive = index === currentSlideIdx
           const status = videoStatus[video.id]
 
           return (
             <div
               key={video.id}
-              className="keen-slider__slide flex justify-center items-center"
+              className="keen-slider__slide flex justify-center items-center min-h-0"
               aria-roledescription="slide"
               aria-label={`Vídeo ${video.title} - ${isActive ? 'atual' : 'inativo'}`}
             >
               <div
-                className={`
-                  w-[240px] h-[440px] // Padrão para mobile
-                  md:w-[320px] md:h-[560px] // Tamanho maior no desktop
-                  rounded-xl overflow-hidden relative transition-all duration-300 ease-in-out
-                  ${
-                    isActive
-                      ? 'scale-100 z-30 shadow-2xl'
-                      : 'scale-75 z-20 opacity-60 blur-sm will-change-transform transform-gpu'
-                  }
-                  bg-black
-                `}
+                className={getSlideClasses(isActive)}
                 role="figure"
                 aria-label={`Container para o vídeo ${video.title}`}
               >
-                {status.loading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-10 text-white">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-lime-400"></div>
-                    <span className="sr-only">Carregando vídeo...</span>
-                  </div>
-                )}
+                {status?.loading && <LoadingSpinner />}
 
-                {status.error ? (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-red-800/80 text-white p-4 text-center z-10">
-                    <p className="text-lg font-bold mb-2">Erro!</p>
-                    <p className="text-sm">
-                      Não foi possível carregar o vídeo.
-                    </p>
-                    <p className="text-xs mt-1">
-                      Verifique a URL ou sua conexão.
-                    </p>
-                  </div>
+                {status?.error ? (
+                  <ErrorMessage />
                 ) : (
                   <VideoPlayer
                     videoSrc={video.src}
