@@ -5,7 +5,8 @@ import SectionDiff from './sections/DiffSection'
 import VideoSection from './sections/VideoSection'
 import BrandIntentionSection from './sections/BrandSection'
 import VideoCarouselSection from './sections/VideoCarouselSection'
-import ImageCarousel from '@ui/ImageCarousel'
+import ImageCarousel from '@components/ImageCarousel'
+import ImageCarouselSection from './sections/ImageCarouselSection'
 
 const heroImage = imgHero
 const statsImage = logosImage
@@ -92,6 +93,77 @@ const images: ImageItem[] = [
   }
 ]
 
+const carouselData = [
+  {
+    id: 'carousel-1',
+    images: [
+      {
+        id: 1,
+        src: '/images/carousel1/image1.jpg',
+        alt: 'Imagem 1 do primeiro carousel',
+        title: 'Primeira imagem'
+      },
+      {
+        id: 2,
+        src: '/images/carousel1/image2.jpg',
+        alt: 'Imagem 2 do primeiro carousel',
+        title: 'Segunda imagem'
+      }
+    ]
+  },
+  {
+    id: 'carousel-2',
+    images: [
+      {
+        id: 1,
+        src: '/images/carousel1/image1.jpg',
+        alt: 'Imagem 1 do primeiro carousel',
+        title: 'Primeira imagem'
+      },
+      {
+        id: 2,
+        src: '/images/carousel1/image2.jpg',
+        alt: 'Imagem 2 do primeiro carousel',
+        title: 'Segunda imagem'
+      }
+    ]
+  },
+  {
+    id: 'carousel-3',
+    images: [
+      {
+        id: 1,
+        src: '/images/carousel1/image1.jpg',
+        alt: 'Imagem 1 do primeiro carousel',
+        title: 'Primeira imagem'
+      },
+      {
+        id: 2,
+        src: '/images/carousel1/image2.jpg',
+        alt: 'Imagem 2 do primeiro carousel',
+        title: 'Segunda imagem'
+      }
+    ]
+  },
+  {
+    id: 'carousel-4',
+    images: [
+      {
+        id: 1,
+        src: '/images/carousel1/image1.jpg',
+        alt: 'Imagem 1 do primeiro carousel',
+        title: 'Primeira imagem'
+      },
+      {
+        id: 2,
+        src: '/images/carousel1/image2.jpg',
+        alt: 'Imagem 2 do primeiro carousel',
+        title: 'Segunda imagem'
+      }
+    ]
+  }
+]
+
 function App() {
   return (
     <>
@@ -103,7 +175,7 @@ function App() {
       />
       <BrandIntentionSection />
       <VideoCarouselSection videos={VIDEOS} />
-      <ImageCarousel images={images} />
+      <ImageCarouselSection carousels={carouselData} title="Test" />
     </>
   )
 }

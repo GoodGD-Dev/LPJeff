@@ -1,20 +1,57 @@
-// src/components/ImageCarousel.tsx
 import React, { useState } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css' // Certifique-se de que o CSS do keen-slider está importado
+import 'keen-slider/keen-slider.min.css'
+import ImageModal from '@ui/ImageModal'
+
+// Navigation Icons
+const ChevronLeftIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+)
+
+const ChevronRightIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+)
 
 interface ImageItem {
   id: number | string
   src: string
   alt: string
+  title?: string
 }
 
 interface ImageCarouselProps {
   images: ImageItem[]
+  showModal?: boolean
+  autoPlay?: boolean
+  autoPlayInterval?: number
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({
+  images,
+  showModal = true,
+  autoPlay = false,
+  autoPlayInterval = 5000
+}) => {
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>(
     {
@@ -24,20 +61,20 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
       dragSpeed: 0.8,
       rubberband: false,
       slides: {
-        perView: 1.25, // Aumentado para mostrar cerca de 25% da próxima imagem
-        spacing: 20, // Espaçamento entre as imagens
-        origin: 'auto' // Alinha o slide ativo à esquerda
+        perView: 1.25,
+        spacing: 20,
+        origin: 'auto'
       },
       breakpoints: {
         '(min-width: 768px)': {
           slides: {
-            perView: 1.15, // Para telas maiores, a imagem ativa ocupa mais espaço, mostrando uns 15% da próxima
+            perView: 1.15,
             spacing: 30
           }
         },
         '(min-width: 1200px)': {
           slides: {
-            perView: 1.1, // Em telas muito grandes, a próxima imagem aparece bem sutilmente (10%)
+            perView: 1.1,
             spacing: 40
           }
         }
@@ -53,104 +90,134 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     []
   )
 
+  // Auto-play functionality
+  React.useEffect(() => {
+    if (autoPlay && !isHovered && slider.current) {
+      const interval = setInterval(() => {
+        slider.current?.next()
+      }, autoPlayInterval)
+
+      return () => clearInterval(interval)
+    }
+  }, [autoPlay, isHovered, autoPlayInterval, slider])
+
+  const goToNext = () => slider.current?.next()
+  const goToPrev = () => slider.current?.prev()
+
   return (
-    <div className="relative w-full py-10 px-4">
+    <div
+      className="relative w-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Navigation Buttons */}
+      <button
+        onClick={goToPrev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-40
+                   bg-gray-800/80 hover:bg-gray-800 text-lime-400
+                   p-3 rounded-full transition-all duration-300
+                   focus:outline-none focus:ring-2 focus:ring-lime-400
+                   opacity-70 hover:opacity-100"
+        aria-label="Imagem anterior"
+      >
+        <ChevronLeftIcon />
+      </button>
+
+      <button
+        onClick={goToNext}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-40
+                   bg-gray-800/80 hover:bg-gray-800 text-lime-400
+                   p-3 rounded-full transition-all duration-300
+                   focus:outline-none focus:ring-2 focus:ring-lime-400
+                   opacity-70 hover:opacity-100"
+        aria-label="Próxima imagem"
+      >
+        <ChevronRightIcon />
+      </button>
+
       <div ref={sliderRef} className="keen-slider w-full">
         {images.map((image, idx) => {
           const isActive = idx === currentSlideIdx
 
-          // Lógica para identificar o slide que está visível e é o "próximo"
-          let isNextPartialSlide = false
-          if (slider.current && slider.current.track.details) {
-            const activeAbsIdx = slider.current.track.details.abs // Índice absoluto do slide ativo
-            const nextAbsIdx = (activeAbsIdx + 1) % images.length // Próximo índice absoluto considerando loop
-
-            // Verifica se o slide atual (idx) corresponde ao próximo slide absoluto
-            // e se ele está dentro da faixa de slides visíveis (uma heurística simples)
-            const slideDetail = slider.current.track.details.slides[idx]
-            if (slideDetail && slideDetail.abs === nextAbsIdx) {
-              // Para carrosseis com origin:auto e perView > 1, o keen-slider geralmente renderiza
-              // o próximo slide logo após o ativo no DOM.
-              isNextPartialSlide = true
-            }
-          }
-
           return (
             <div
               key={image.id}
-              className="keen-slider__slide flex justify-start items-center relative" // justify-start para garantir alinhamento à esquerda no slide
+              className="keen-slider__slide flex justify-start items-center relative"
               aria-roledescription="slide"
               aria-label={`Imagem ${image.alt} - ${isActive ? 'atual' : 'inativa'}`}
             >
               <div
                 className={`
-                  relative
-                  rounded-xl overflow-hidden shadow-2xl
+                  relative rounded-xl overflow-hidden shadow-2xl
                   transition-all duration-300 ease-in-out transform-gpu will-change-transform
-                  bg-gray-800 flex items-center justify-center // Cor de fundo para as partes vazias
-
-                  // Definindo uma altura fixa e deixando a largura ser controlada pelo keen-slider e aspectRatio
-                  h-[380px] md:h-[480px] lg:h-[580px] // Altura responsiva
-                  aspect-w-3 aspect-h-4 // TailwindCSS v3+ para proporção (ex: para retrato 3:4)
-                                        // Ajuste conforme a proporção real das suas imagens (ex: 4:3, 16:9, 1:1)
-
+                  bg-gray-800 flex items-center justify-center
+                  h-[380px] md:h-[480px] lg:h-[580px]
                   ${
                     isActive
-                      ? 'opacity-100 z-30' // Imagem ativa: opacidade total
-                      : 'opacity-70 blur-[1px] z-20' // Imagens laterais: opaca, leve blur
+                      ? 'opacity-100 z-30 scale-100'
+                      : 'opacity-70 blur-[1px] z-20 scale-95'
                   }
                 `}
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover" // object-cover para preencher o contêiner
-                  loading="lazy"
-                />
+                {showModal ? (
+                  <ImageModal
+                    imageSrc={image.src}
+                    imageAlt={image.alt}
+                    imageTitle={image.title}
+                    triggerElement={
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    }
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
               </div>
-
-              {/* Seta de navegação APENAS para o slide que está visível e é o "próximo" */}
-              {slider.current && isNextPartialSlide && (
-                <button
-                  onClick={() => slider.current?.next()}
-                  className={`
-                     absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 // Posiciona sobre a borda direita
-                     bg-gray-800 text-lime-400 p-3 rounded-full
-                     z-50 // Acima de tudo
-                     opacity-90 hover:opacity-100 transition-opacity
-                     focus:outline-none focus:ring-2 focus:ring-lime-400
-                     border-2 border-lime-400 // Adiciona borda
-                     w-12 h-12 flex items-center justify-center // Tamanho fixo para o botão
-                   `}
-                  aria-label="Próxima imagem"
-                >
-                  &#10140; {/* Seta para a direita com um círculo */}
-                </button>
-              )}
             </div>
           )
         })}
       </div>
-      {/* Indicadores de slide (dots) - Opcional, para feedback visual */}
+
+      {/* Dots Indicator */}
       {slider.current && (
-        <div className="dots flex justify-center mt-8">
-          {[...Array(slider.current.track.details.slides.length).keys()].map(
-            (idx) => {
-              return (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    slider.current?.moveToIdx(idx)
-                  }}
-                  className={`
-                    dot w-3 h-3 rounded-full mx-1 cursor-pointer
-                    ${idx === currentSlideIdx ? 'bg-lime-400' : 'bg-gray-600'}
-                  `}
-                  aria-label={`Ir para a imagem ${idx + 1}`}
-                ></button>
-              )
-            }
-          )}
+        <div className="flex justify-center mt-8 space-x-2">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => slider.current?.moveToIdx(idx)}
+              className={`
+                w-3 h-3 rounded-full transition-all duration-300
+                ${
+                  idx === currentSlideIdx
+                    ? 'bg-lime-400 scale-125'
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }
+              `}
+              aria-label={`Ir para a imagem ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Progress Bar (opcional) */}
+      {autoPlay && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-lime-400 rounded-full transition-all duration-100"
+            style={{
+              width: `${((Date.now() % autoPlayInterval) / autoPlayInterval) * 100}%`
+            }}
+          />
         </div>
       )}
     </div>
@@ -158,3 +225,35 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
 }
 
 export default ImageCarousel
+
+/**
+ * === EXEMPLO DE USO ===
+ *
+ * const images = [
+ *   {
+ *     id: 1,
+ *     src: "/path/to/image1.jpg",
+ *     alt: "Descrição da imagem 1",
+ *     title: "Título da imagem 1"
+ *   },
+ *   {
+ *     id: 2,
+ *     src: "/path/to/image2.jpg",
+ *     alt: "Descrição da imagem 2",
+ *     title: "Título da imagem 2"
+ *   }
+ * ]
+ *
+ * // Uso básico
+ * <ImageCarousel images={images} />
+ *
+ * // Com auto-play
+ * <ImageCarousel
+ *   images={images}
+ *   autoPlay={true}
+ *   autoPlayInterval={3000}
+ * />
+ *
+ * // Sem modal
+ * <ImageCarousel images={images} showModal={false} />
+ */

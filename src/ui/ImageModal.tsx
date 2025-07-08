@@ -148,11 +148,4 @@ EXEMPLOS:
   className="w-32 h-32 rounded-full"
 />
 
-FUNCIONALIDADES:
-- Auto-controlado (não precisa de isOpen/onClose)
-- Clique na imagem abre modal automaticamente
-- Trigger customizável
-- Fecha com ESC, backdrop ou botão X
-- Aspect ratio 1:1 arredondado
-- Responsivo e acessível
 */
