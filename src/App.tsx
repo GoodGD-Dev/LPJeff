@@ -5,6 +5,7 @@ import SectionDiff from './sections/DiffSection'
 import VideoSection from './sections/VideoSection'
 import BrandIntentionSection from './sections/BrandSection'
 import VideoCarouselSection from './sections/VideoCarouselSection'
+import ImageCarousel from '@ui/ImageCarousel'
 
 const heroImage = imgHero
 const statsImage = logosImage
@@ -57,6 +58,40 @@ const VIDEOS = [
   }
 ]
 
+interface ImageItem {
+  id: number | string
+  src: string
+  alt: string
+}
+
+const images: ImageItem[] = [
+  {
+    id: 1,
+    src: 'https://images.unsplash.com/photo-1507525428034-b723cf96132e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Praia paradisíaca com coqueiros'
+  },
+  {
+    id: 2,
+    src: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Montanhas nevadas ao pôr do sol'
+  },
+  {
+    id: 3,
+    src: 'https://images.unsplash.com/photo-1510414705387-a2f022877a11?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Cidade iluminada à noite com rio'
+  },
+  {
+    id: 4,
+    src: 'https://images.unsplash.com/photo-1506744038136-462a09665926?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Floresta densa com neblina'
+  },
+  {
+    id: 5,
+    src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Cachoeira em meio à natureza exuberante'
+  }
+]
+
 function App() {
   return (
     <>
@@ -68,6 +103,7 @@ function App() {
       />
       <BrandIntentionSection />
       <VideoCarouselSection videos={VIDEOS} />
+      <ImageCarousel images={images} />
     </>
   )
 }
