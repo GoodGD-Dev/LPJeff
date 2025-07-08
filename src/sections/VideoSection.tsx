@@ -11,7 +11,6 @@ const VideoSection: React.FC<VideoSectionProps> = ({ videoSrc, thumbnail }) => {
   return (
     <section className="w-full py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título da Section */}
         <div className="mb-8 md:mb-12">
           <Title as="h2" size="md">
             A intenção por trás
@@ -24,12 +23,16 @@ const VideoSection: React.FC<VideoSectionProps> = ({ videoSrc, thumbnail }) => {
           </Title>
         </div>
 
-        {/* Video Player */}
         <div className="w-full">
           <VideoPlayer
             videoSrc={videoSrc}
             thumbnail={thumbnail}
             className="max-w-4xl mx-auto"
+            title="Vídeo Demonstrativo"
+            aspectRatio="1:1"
+            isPlaying={false} // Mantém falso, o clique na thumbnail inicia
+            isMuted={true} // Definir como TRUE para que o play no primeiro clique não seja bloqueado por políticas de navegador
+            showControls={true} // Definir como TRUE para que os controles apareçam após o play
           />
         </div>
       </div>
@@ -40,15 +43,15 @@ const VideoSection: React.FC<VideoSectionProps> = ({ videoSrc, thumbnail }) => {
 export default VideoSection
 
 /*
-=== EXEMPLO DE USO ===
+--- EXEMPLO DE USO ATUALIZADO DO VideoSection ---
 
 PROPS OBRIGATÓRIAS:
-- videoSrc: string - URL/caminho do vídeo
-- thumbnail: string - URL da thumbnail do vídeo
+- videoSrc: string - URL/caminho do vídeo a ser exibido.
+- thumbnail: string - URL da thumbnail do vídeo (aparece antes do primeiro play).
 
 EXEMPLOS:
 
-// Com vídeo e thumbnail
+// Com vídeo e thumbnail (usando os novos comportamentos do VideoPlayer)
 <VideoSection
   videoSrc="https://exemplo.com/video.mp4"
   thumbnail="https://exemplo.com/thumb.jpg"
@@ -67,10 +70,16 @@ EXEMPLOS:
 />
 
 CONFIGURAÇÃO FIXA:
-- Título: "Assista ao Vídeo Demonstrativo"
-- Estilo: h2, xl, cor #D9FF85, bold
-- Layout: Section com py-16, bg-gray-900
-- Container: max-w-6xl centralizado
+- Título da Seção: "A intenção por trás de cada traço"
+- Estilo do Título: h2, md, com parte em bold
+- Layout da Seção: `section` com padding vertical (`py-16`), centralizado (`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8`).
+- Player de Vídeo:
+  - `isPlaying={false}`: Inicia pausado.
+  - `isMuted={true}`: Inicia mudo.
+  - `showControls={true}`: Controles customizados sempre visíveis.
+  - `title="Vídeo Demonstrativo"`: Título exibido acima do player.
+  - `aspectRatio="16:9"`: Define a proporção do vídeo.
 
-Para customizar o título ou layout, edite diretamente no código do componente.
+Para customizar o título ou layout da `VideoSection`, edite diretamente no código do componente.
+Para customizar o comportamento de reprodução ou mute do `VideoPlayer` dentro desta seção, ajuste as props `isPlaying`, `isMuted` e `showControls` passadas para ele.
 */

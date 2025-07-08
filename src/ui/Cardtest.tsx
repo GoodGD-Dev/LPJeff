@@ -1,8 +1,11 @@
+// Cardtest.tsx
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
-import VideoPlayer from '@ui/VideoModal'
 
+import VideoPlayer from '@ui/VideoModal' // Verifique o caminho real para o seu VideoModal
+
+// 1. Definindo a interface para o tipo de objeto de vídeo
 interface Video {
   id: number
   src: string
@@ -10,22 +13,62 @@ interface Video {
   title?: string
 }
 
-// Remova a constante VIDEOS daqui. Ela será passada como prop.
+// 2. Atualizando o array VIDEOS para corresponder à nova interface
+const VIDEOS: Video[] = [
+  {
+    id: 1,
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video1/1280/720'
+  },
+  {
+    id: 2,
+    src: 'https://www.w3schools.com/html/movie.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video2/1280/720'
+  },
+  {
+    id: 3,
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video3/1280/720'
+  },
+  {
+    id: 4,
+    src: 'https://www.w3schools.com/html/movie.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video4/1280/720'
+  },
+  {
+    id: 5,
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video5/1280/720'
+  },
+  {
+    id: 6,
+    src: 'https://www.w3schools.com/html/movie.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video6/1280/720'
+  },
+  {
+    id: 7,
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video7/1280/720'
+  },
+  {
+    id: 8,
+    src: 'https://www.w3schools.com/html/movie.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video8/1280/720'
+  },
+  {
+    id: 9,
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnailSrc: 'https://picsum.photos/seed/video9/1280/720'
+  }
+]
 
-interface VideoCarouselModalProps {
-  videos: Video[] // Mude o nome da prop de 'infos' para 'videos' e defina o tipo.
-}
-
-const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
-  // Receba 'videos' como prop
+export default function CardTest() {
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0)
-
-  // Inicialize videoStatus com base nos vídeos passados como prop
+  // Certifique-se de que o estado videoStatus também reflita os IDs como chaves numéricas
   const [videoStatus, setVideoStatus] = useState<
     Record<number, { loading: boolean; error: boolean }>
   >(
-    videos.reduce(
-      // Use 'videos' (a prop) aqui
+    VIDEOS.reduce(
       (acc, video) => ({
         ...acc,
         [video.id]: { loading: false, error: false }
@@ -117,10 +160,9 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
       )}
 
       <div ref={sliderRef} className="keen-slider w-full">
-        {videos.map((video) => {
-          // Use 'videos' (a prop) aqui
+        {VIDEOS.map((video) => {
           const isActive =
-            videos.findIndex((v) => v.id === video.id) === currentSlideIdx // Use 'videos' (a prop) aqui
+            VIDEOS.findIndex((v) => v.id === video.id) === currentSlideIdx
           const status = videoStatus[video.id]
 
           return (
@@ -165,15 +207,15 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
                 ) : (
                   <VideoPlayer
                     videoSrc={video.src}
-                    title={video.title}
+                    title={video.title} // Agora video.title existe
                     thumbnail={video.thumbnailSrc}
-                    onLoadStart={() => handleLoadStart(video.id)}
-                    onCanPlayThrough={() => handleCanPlayThrough(video.id)}
-                    onError={() => handleError(video.id)}
                     aspectRatio="9:16"
                     isPlaying={isActive}
                     isMuted={!isActive}
                     showControls={isActive}
+                    onLoadStart={() => handleLoadStart(video.id)}
+                    onCanPlayThrough={() => handleCanPlayThrough(video.id)}
+                    onError={() => handleError(video.id)}
                     showPlayOverlay={isActive}
                   />
                 )}
@@ -185,5 +227,3 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
     </div>
   )
 }
-
-export default VideoCarouselModal
