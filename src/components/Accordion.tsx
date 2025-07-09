@@ -1,34 +1,19 @@
 import React, { useState } from 'react'
 import AccordionItem from '@ui/AccordionItem'
 
-interface AccordionProps {
-  /** Permite que múltiplos itens do acordeão estejam abertos ao mesmo tempo. */
-  allowMultipleOpen?: boolean
-  /** Um array de objetos com o título, ícone e conteúdo de cada item do acordeão. */
-  items: {
-    title: string
-    icon?: React.ReactNode
-    content: React.ReactNode
-    backgroundColor?: string
-    titleColor?: string
-    contentColor?: string
-    hoverColor?: string
-  }[]
-}
-
 const Accordion: React.FC<AccordionProps> = ({
   allowMultipleOpen = false,
   items
 }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null) // Para single open
-  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set()) // Para multiple open
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set())
 
   const handleSetOpenIndex = (index: number | null) => {
     if (allowMultipleOpen) {
       setOpenIndices((prev) => {
         const newSet = new Set(prev)
         if (index === null) {
-          return new Set() // Fecha todos se null for passado para multiple
+          return new Set()
         }
         if (newSet.has(index)) {
           newSet.delete(index)

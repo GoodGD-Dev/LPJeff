@@ -30,20 +30,6 @@ const ChevronRightIcon = () => (
   </svg>
 )
 
-interface ImageItem {
-  id: number | string
-  src: string
-  alt: string
-  title?: string
-}
-
-interface ImageCarouselProps {
-  images: ImageItem[]
-  showModal?: boolean
-  autoPlay?: boolean
-  autoPlayInterval?: number
-}
-
 const ImageCarousel: React.FC<ImageCarouselProps> = ({
   images,
   showModal = true,

@@ -60,6 +60,12 @@
       "@styles/*": [
         "src/styles/*"
       ],
+      "@types": [
+        "src/types"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
       "@ui": [
         "src/ui"
       ],

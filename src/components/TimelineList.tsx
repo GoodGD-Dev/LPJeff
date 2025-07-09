@@ -1,20 +1,5 @@
+import { TimelineColors, TimelineListProps } from '@/types/layout'
 import React, { useRef, useEffect, useState, useCallback } from 'react'
-
-interface TimelineColors {
-  activeCircle: string
-  inactiveCircle: string
-  activeLine: string
-  inactiveLine: string
-  activeText: string
-  inactiveText: string
-}
-
-interface TimelineListProps {
-  items: string[]
-  colors?: TimelineColors
-  threshold?: number
-  rootMargin?: string
-}
 
 const DEFAULT_COLORS: TimelineColors = {
   activeCircle: 'bg-green-500',

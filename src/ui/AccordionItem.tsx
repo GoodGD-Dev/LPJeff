@@ -1,28 +1,5 @@
-// src/components/AccordionItem.tsx
+import { AccordionItemProps } from '@/types/ui'
 import React, { useState, useRef, useEffect } from 'react'
-
-interface AccordionItemProps {
-  /** O título do item do acordeão. */
-  title: string
-  /** O ícone SVG a ser exibido ao lado do título. */
-  icon?: React.ReactNode
-  /** O conteúdo a ser exibido quando o acordeão é aberto. */
-  children: React.ReactNode
-  /** O índice do item, usado para controlar qual item está aberto. */
-  index: number
-  /** O índice do item atualmente aberto (controlado pelo componente pai). */
-  openIndex: number | null
-  /** Função de callback para notificar o pai sobre qual item foi clicado. */
-  setOpenIndex: (index: number | null) => void
-  /** Cor de fundo do card (classe Tailwind) */
-  backgroundColor?: string
-  /** Cor do texto do título (classe Tailwind) */
-  titleColor?: string
-  /** Cor do texto do conteúdo (classe Tailwind) */
-  contentColor?: string
-  /** Cor de fundo do hover (classe Tailwind) */
-  hoverColor?: string
-}
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
   title,

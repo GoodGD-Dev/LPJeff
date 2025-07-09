@@ -1,18 +1,12 @@
+import { MainLayoutProps } from '@/types/layout'
 import React from 'react'
 
-interface Section {
-  id: string
-  content: React.ReactNode
-}
+// ============= TIPOS TYPESCRIPT =============
 
-interface MainLayoutProps {
-  sections?: Section[]
-  children?: React.ReactNode
-}
-
+// ============= COMPONENTE MAIN LAYOUT =============
 const MainLayout: React.FC<MainLayoutProps> = ({ sections = [], children }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen">
       {/* Conteúdo principal */}
       <main>
         {sections.length > 0 ? (

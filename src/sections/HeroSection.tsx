@@ -2,16 +2,12 @@ import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 
-interface HeroProps {
-  heroImage?: string
-  statsImage?: string
-  className?: string
-}
-
 const Hero: React.FC<HeroProps> = ({
   heroImage,
   statsImage,
-  className = ''
+  className = '',
+  sectionTitle,
+  descriptionText
 }) => {
   return (
     <section className={`w-full max-w-4xl mx-auto px-4 py-16 ${className}`}>
@@ -27,18 +23,14 @@ const Hero: React.FC<HeroProps> = ({
       {/* Título principal */}
       <div className="mb-8">
         <Title as="h1" align="center">
-          Marcas por acaso competem por preço.
-        </Title>
-        <Title as="span" bold align="center" className="block mt-2">
-          Marcas com intenção vendem valor.
+          {sectionTitle}
         </Title>
       </div>
 
       {/* Texto descritivo */}
       <div className="mb-10">
-        <Text size="lg" align="center" color="rgba(255, 255, 255, 0.7)">
-          Nós construímos a identidade visual estratégica que posiciona seu
-          negócio como a escolha óbvia no seu mercado.
+        <Text align="center" color="rgba(255, 255, 255, 0.7)">
+          {descriptionText}
         </Text>
       </div>
 

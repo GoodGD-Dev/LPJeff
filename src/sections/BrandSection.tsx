@@ -3,16 +3,12 @@ import CardList from '@components/CardList'
 import Title from '@ui/Title'
 import React from 'react'
 
-// Interfaces para o CardList
-interface CardListItem {
-  id: string
-  icon: React.ReactNode
-  text: string
-}
-
 // Seção principal
-const BrandIntentionSection = () => {
-  const listItems: CardListItem[] = [
+const BrandIntentionSection: React.FC<BrandIntentionSectionProps> = ({
+  sectionTitle,
+  listItems: propListItems
+}) => {
+  const defaultListItems: CardListItem[] = [
     {
       id: '1',
       icon: <Icon type="smile" />,
@@ -40,25 +36,20 @@ const BrandIntentionSection = () => {
     }
   ]
 
+  const currentListItems = propListItems || defaultListItems
+
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-16">
       {/* Título da seção */}
-      <div className="mb-12">
-        <Title
-          as="h2"
-          size="lg"
-          bold
-          color="#ffffff"
-          align="center"
-          className="mb-4"
-        >
-          O que uma marca com intenção gera:
+      <div className="mb-8">
+        <Title as="h1" align="center">
+          {sectionTitle}
         </Title>
       </div>
 
       {/* CardList centralizado */}
       <div className="flex justify-center">
-        <CardList items={listItems} className="mx-auto" />
+        <CardList items={currentListItems} className="mx-auto" />
       </div>
     </section>
   )

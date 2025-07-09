@@ -1,20 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 
-interface VideoPlayerProps {
-  videoSrc: string
-  title?: string
-  className?: string
-  thumbnail?: string
-  aspectRatio?: '1:1' | '16:9' | '9:16'
-  isPlaying: boolean
-  isMuted: boolean
-  showControls: boolean
-  onLoadStart?: () => void
-  onCanPlayThrough?: () => void
-  onError?: () => void
-  showPlayOverlay?: boolean
-}
-
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   videoSrc,
   title,

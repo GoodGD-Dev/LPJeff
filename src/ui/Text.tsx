@@ -1,18 +1,5 @@
 import React from 'react'
 
-interface TextProps {
-  children: React.ReactNode
-  as?: 'p' | 'span' | 'li'
-  color?: string
-  bulletColor?: string
-  uppercase?: boolean
-  lowercase?: boolean
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  align?: 'left' | 'center' | 'right'
-  expanded?: boolean
-  className?: string
-}
-
 const Text: React.FC<TextProps> = ({
   children,
   as = 'p',
@@ -23,8 +10,22 @@ const Text: React.FC<TextProps> = ({
   size = 'md',
   align = as === 'li' ? 'left' : 'center',
   expanded = false,
+  leading = 'normal',
   className = ''
 }) => {
+  // Função para processar quebras de linha
+  const processText = (text: React.ReactNode) => {
+    if (typeof text === 'string') {
+      return text.split('\n').map((line, index, array) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < array.length - 1 && <br />}
+        </React.Fragment>
+      ))
+    }
+    return text
+  }
+
   // Mapeamento de tamanhos
   const sizeClasses = {
     xs: 'text-xs', // 12px
@@ -41,6 +42,16 @@ const Text: React.FC<TextProps> = ({
     right: 'text-right'
   }
 
+  // Mapeamento de line-height
+  const leadingClasses = {
+    none: 'leading-none',
+    tight: 'leading-tight',
+    snug: 'leading-snug',
+    normal: 'leading-normal',
+    relaxed: 'leading-relaxed',
+    loose: 'leading-loose'
+  }
+
   // Componente dinâmico
   const Component = as
 
@@ -54,7 +65,7 @@ const Text: React.FC<TextProps> = ({
           font-medium
           ${uppercase ? 'uppercase' : ''}
           ${lowercase ? 'lowercase' : ''}
-          leading-none
+          ${leadingClasses[leading as keyof typeof leadingClasses] || leading} // Usa a prop leading
           tracking-normal
           ${alignClasses[align]}
           flex items-center gap-2
@@ -80,78 +91,15 @@ const Text: React.FC<TextProps> = ({
         font-medium
         ${uppercase ? 'uppercase' : ''}
         ${lowercase ? 'lowercase' : ''}
-        leading-none
+        ${leadingClasses[leading as keyof typeof leadingClasses] || leading} // Usa a prop leading
         tracking-normal
         ${alignClasses[align]}
         ${className}
       `}
       style={{ color }}
     >
-      {children}
+      {processText(children)}
     </Component>
   )
 }
-
 export default Text
-
-/*
-=== EXEMPLO DE USO ===
-
-PROPS OBRIGATÓRIAS:
-- children (React.ReactNode) - O texto
-
-PROPS OPCIONAIS (com valores padrão):
-- as?: 'p' | 'span' | 'li' (padrão: 'p')
-- color?: string (padrão: '#ffffff')
-- bulletColor?: string (só para li - padrão: mesma cor do texto)
-- uppercase?: boolean (padrão: false)
-- lowercase?: boolean (padrão: false)
-- size?: 'sm' | 'md' | 'lg' | 'xl' (padrão: 'md')
-- align?: 'left' | 'center' | 'right' (padrão: 'center' para p/span, 'left' para li)
-- expanded?: boolean (padrão: false) - Usa versão expandida da fonte
-- className?: string (padrão: '')
-
-EXEMPLOS:
-
-// Parágrafo básico
-<Text>Meu parágrafo</Text>
-
-// Span inline
-<Text as="span">Texto inline</Text>
-
-// Item de lista
-<Text as="li">Item da lista</Text>
-
-// Lista completa
-<ul className="space-y-2">
-  <Text as="li">Primeiro item</Text>
-  <Text as="li" color="#3b82f6">Segundo item azul</Text>
-  <Text as="li" bulletColor="#10b981" color="#f59e0b">
-    Terceiro item com bullet verde
-  </Text>
-</ul>
-
-// Com cor personalizada
-<Text color="#3b82f6">Parágrafo azul</Text>
-
-// Tamanho grande em maiúsculo
-<Text size="lg" uppercase>PARÁGRAFO GRANDE</Text>
-
-// Lista com bullet customizado
-<Text as="li" color="#ec4899" bulletColor="#10b981" size="lg">
-  Item rosa com bullet verde
-</Text>
-
-// Exemplo completo
-<Text
-  as="span"
-  size="lg"
-  color="#ec4899"
-  uppercase
-  expanded
-  align="left"
-  className="mb-4"
->
-  TEXTO SPAN COMPLETO
-</Text>
-*/

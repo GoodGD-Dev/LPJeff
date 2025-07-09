@@ -2,17 +2,6 @@ import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 
-interface CardProps {
-  icon?: React.ReactNode
-  title: string
-  text?: string | React.ReactNode
-  listItems?: string[]
-  description?: string | React.ReactNode
-  children?: React.ReactNode
-  className?: string
-  variant?: 'dark' | 'light'
-}
-
 const Card: React.FC<CardProps> = ({
   icon,
   title,
@@ -23,20 +12,19 @@ const Card: React.FC<CardProps> = ({
   className = '',
   variant = 'dark'
 }) => {
-  // Definindo as cores baseadas na variação
   const variants = {
     dark: {
       cardBg: '#202020',
       cardBorder: '#2C2C2C',
       titleColor: '#FFFFFF',
-      textColor: 'rgba(255, 255, 255, 0.6)', // Branco 60% opacidade
+      textColor: 'rgba(255, 255, 255, 0.6)',
       iconColor: 'text-white'
     },
     light: {
       cardBg: '#D9FF85',
       cardBorder: '#D9FF85',
       titleColor: '#191919',
-      textColor: 'rgba(25, 25, 25, 0.6)', // Preto 60% opacidade
+      textColor: 'rgba(25, 25, 25, 0.6)',
       iconColor: 'text-black'
     }
   }

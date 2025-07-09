@@ -1,15 +1,5 @@
+import { CardListProps } from '@/types/ui'
 import React from 'react'
-
-interface CardListItem {
-  id: string
-  icon: React.ReactNode
-  text: string
-}
-
-interface CardListProps {
-  items: CardListItem[]
-  className?: string
-}
 
 const CardList: React.FC<CardListProps> = ({ items, className = '' }) => {
   return (

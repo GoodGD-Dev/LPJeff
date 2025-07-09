@@ -1,13 +1,5 @@
 import React from 'react'
 
-interface ImageModalProps {
-  imageSrc: string
-  imageAlt?: string
-  imageTitle?: string
-  triggerElement?: React.ReactNode
-  className?: string
-}
-
 const ImageModal: React.FC<ImageModalProps> = ({
   imageSrc,
   imageAlt,

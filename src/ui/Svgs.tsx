@@ -1,11 +1,5 @@
 import React from 'react'
 
-interface IconProps {
-  type: 'x' | 'check' | 'play' | 'smile' | 'heart' | 'flag' | 'brain' | 'eye'
-  className?: string
-  color?: string
-}
-
 const Icon: React.FC<IconProps> = ({ type, className = '', color }) => {
   // Cores padrão baseadas no tipo
   const getDefaultColor = () => {

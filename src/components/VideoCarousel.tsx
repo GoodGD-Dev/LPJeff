@@ -3,13 +3,6 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import VideoPlayer from '@ui/VideoModal'
 
-interface Video {
-  id: number
-  src: string
-  thumbnailSrc?: string
-  title?: string
-}
-
 interface VideoCarouselModalProps {
   videos: Video[]
 }

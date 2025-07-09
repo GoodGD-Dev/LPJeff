@@ -1,44 +1,9 @@
-// src/components/ImageCarouselSection.tsx
 import React from 'react'
 import Title from '@ui/Title'
 import ImageCarousel from '@components/ImageCarousel'
 
-interface ImageItem {
-  id: number | string
-  src: string
-  alt: string
-  title?: string
-}
-
-interface CarouselData {
-  id: string
-  images: ImageItem[]
-  showModal?: boolean
-  autoPlay?: boolean
-  autoPlayInterval?: number
-}
-
-interface ImageCarouselSectionProps {
-  title: string
-  titleProps?: {
-    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'span'
-    color?: string
-    uppercase?: boolean
-    lowercase?: boolean
-    bold?: boolean
-    size?: 'sm' | 'md' | 'lg' | 'xl'
-    align?: 'left' | 'center' | 'right'
-    expanded?: boolean
-    className?: string
-  }
-  carousels: CarouselData[]
-  sectionClassName?: string
-  spacing?: 'default' | 'sm' | 'md' | 'lg' | 'xl'
-}
-
 const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
-  title,
-  titleProps = {},
+  sectionTitle,
   carousels,
   sectionClassName = '',
   spacing = 'default'
@@ -52,21 +17,14 @@ const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
     xl: 'space-y-20' // 80px
   }
 
-  // Props padrão para o título
-  const defaultTitleProps = {
-    as: 'h2' as const,
-    size: 'lg' as const,
-    bold: true,
-    expanded: true,
-    className: 'mb-8 lg:mb-12',
-    ...titleProps
-  }
-
   return (
     <section className={`w-full py-2 lg:py-16 ${sectionClassName}`}>
       <div className="container mx-auto">
-        {/* Título da Seção */}
-        <Title {...defaultTitleProps}>{title}</Title>
+        <div className="mb-8">
+          <Title as="h1" align="center">
+            {sectionTitle}
+          </Title>
+        </div>
 
         {/* Carousels */}
         <div className={`${spacingClasses[spacing]}`}>

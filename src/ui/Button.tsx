@@ -1,16 +1,5 @@
+import { ButtonProps } from '@/types/ui'
 import React from 'react'
-
-interface ButtonProps {
-  children: React.ReactNode
-  icon?: React.ReactNode
-  bgColor?: string
-  textColor?: string
-  size?: 'sm' | 'md' | 'lg'
-  expanded?: boolean
-  disabled?: boolean
-  onClick?: () => void
-  className?: string
-}
 
 const Button: React.FC<ButtonProps> = ({
   children,
