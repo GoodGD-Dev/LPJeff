@@ -8,6 +8,9 @@ import VideoCarouselSection from './sections/VideoCarouselSection'
 import ImageCarousel from '@components/ImageCarousel'
 import ImageCarouselSection from './sections/ImageCarouselSection'
 import ChooseSection from './sections/ChooseSection'
+import TimelineList from './components/TimelineList'
+import Accordion from './components/Accordion'
+import { HelpCircle, Settings, User } from 'lucide-react'
 
 const heroImage = imgHero
 const statsImage = logosImage
@@ -165,6 +168,74 @@ const carouselData = [
   }
 ]
 
+const processSteps = [
+  'Entrevistas Internas',
+  'Análise de Concorrentes',
+  'Pesquisa de Público',
+  'Definição Estratégica',
+  'Desenvolvimento Visual',
+  'Ampliação Visual',
+  'Refinamento Visual',
+  'Sintetização do Manual',
+  'Organização e Entrega',
+  // Adicione mais itens para testar a rolagem
+  'Revisão Final',
+  'Lançamento',
+  'Feedback e Iteração',
+  'Expansão de Recursos',
+  'Monitoramento Contínuo'
+]
+
+const accordionItems = [
+  {
+    title: 'Informações Pessoais',
+    icon: <User size={20} />,
+    content: (
+      <div className="p-4">
+        <p>
+          Aqui você pode gerenciar suas informações pessoais como nome, email e
+          telefone.
+        </p>
+        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
+          Editar Perfil
+        </button>
+      </div>
+    )
+  },
+  {
+    title: 'Configurações',
+    icon: <Settings size={20} />,
+    content: (
+      <div className="p-4">
+        <div className="space-y-2">
+          <label className="flex items-center">
+            <input type="checkbox" className="mr-2" />
+            Receber notificações por email
+          </label>
+          <label className="flex items-center">
+            <input type="checkbox" className="mr-2" />
+            Modo escuro
+          </label>
+        </div>
+      </div>
+    )
+  },
+  {
+    title: 'Ajuda e Suporte',
+    icon: <HelpCircle size={20} />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  }
+]
+
 function App() {
   return (
     <>
@@ -178,6 +249,7 @@ function App() {
       <VideoCarouselSection videos={VIDEOS} />
       <ImageCarouselSection carousels={carouselData} title="Test" />
       <ChooseSection />
+      <Accordion items={accordionItems} />
     </>
   )
 }
