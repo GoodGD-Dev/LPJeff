@@ -33,9 +33,12 @@ export interface AccordionItemProps {
   openIndex: number | null
   setOpenIndex: (index: number | null) => void
   backgroundColor?: string
+  openBackgroundColor?: string
+  iconColor?: string
+  openTitleColor?: string
+  openContentColor?: string
   titleColor?: string
   contentColor?: string
-  /** Cor de fundo do hover (classe Tailwind) */
   hoverColor?: string
 }
 

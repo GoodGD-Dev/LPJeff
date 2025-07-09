@@ -1,6 +1,7 @@
 import Hero from '../sections/HeroSection'
 import imgHero from '../assets/images/Simbolo3d.png'
 import logosImage from '../assets/images/logo-de-empresas 1.png'
+import imgMoney from '../assets/images/money.svg'
 import SectionDiff from '../sections/DiffSection'
 import VideoSection from '../sections/VideoSection'
 import BrandIntentionSection from '../sections/BrandSection'
@@ -8,12 +9,14 @@ import VideoCarouselSection from '../sections/VideoCarouselSection'
 import ImageCarouselSection from '../sections/ImageCarouselSection'
 import ChooseSection from '../sections/ChooseSection'
 import Accordion from '../components/Accordion'
-import { HelpCircle, AArrowUp, Settings, User } from 'lucide-react'
 import Icon from '@ui/Svgs'
 import ProcessStepsSection from '../sections/ProcessStepsSection'
+import InvestSection from '@/sections/InvestSection'
 
 const heroImage = imgHero
 const statsImage = logosImage
+
+const moneyImage = imgMoney
 
 const processSteps = [
   'Entrevistas Internas',
@@ -34,13 +37,14 @@ const processSteps = [
 
 const accordionItems = [
   {
-    title: 'Informações Pessoais',
-    icon: <User size={20} />,
+    title: 'Estratégia e Posicionamento',
+    icon: <Icon type="chess" />,
     content: (
       <div className="p-4">
         <p>
-          Aqui você pode gerenciar suas informações pessoais como nome, email e
-          telefone.
+          Um diagnóstico profundo que define seu lugar único no mercado, a
+          personalidade da sua marca e a mensagem que vai atrair os clientes
+          certos para sua empresa.
         </p>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
           Editar Perfil
@@ -49,8 +53,8 @@ const accordionItems = [
     )
   },
   {
-    title: 'Configurações',
-    icon: <Settings size={20} />,
+    title: 'Logotipo Feito a Mão',
+    icon: <Icon type="pencil-ruler" />,
     content: (
       <div className="p-4">
         <div className="space-y-2">
@@ -67,8 +71,92 @@ const accordionItems = [
     )
   },
   {
-    title: 'Ajuda e Suporte',
-    icon: <HelpCircle size={20} />,
+    title: 'Paleta de Cores Selecionada',
+    icon: <Icon type="color-picker" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Tipografia Curada',
+    icon: <Icon type="letter-spacing" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Elementos Gráficos Exclusivos',
+    icon: <Icon type="classify" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Diretriz Fotográfica com IA',
+    icon: <Icon type="ai" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Manual de Marca Online',
+    icon: <Icon type="box" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Kit de Lançamento',
+    icon: <Icon type="certificate2" />,
+    content: (
+      <div className="p-4">
+        <p>Entre em contato conosco:</p>
+        <ul className="mt-2 space-y-1">
+          <li>Email: suporte@exemplo.com</li>
+          <li>Telefone: (11) 1234-5678</li>
+          <li>WhatsApp: (11) 9876-5432</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    title: 'Certificado de Anterioridade',
+    icon: <Icon type="certificate" />,
     content: (
       <div className="p-4">
         <p>Entre em contato conosco:</p>
@@ -379,6 +467,19 @@ function Home() {
         ]}
       />
       <Accordion items={accordionItems} />
+      <InvestSection
+        heroImage={moneyImage}
+        sectionTitle={
+          <>
+            <span className="font-semibold">Intenção é um investimento.</span>
+            <br />
+            Acaso é um custo.
+          </>
+        }
+        descriptionText={`Continuar com uma marca que
+          está ao acaso te custa clientes
+          e lucro todos os dias.`}
+      />
     </>
   )
 }

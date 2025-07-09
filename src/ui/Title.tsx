@@ -27,8 +27,9 @@ const Title: React.FC<TitleProps> = ({
 
   // Mapeamento de tamanhos
   const sizeClasses = {
+    xs: 'text-base', // 16px
     sm: 'text-2xl', // 24px
-    md: 'text-[32px]', // 32px
+    md: 'text-3xl', // 30px
     lg: 'text-4xl', // 36px
     xl: 'text-5xl' // 48px
   }
@@ -42,6 +43,8 @@ const Title: React.FC<TitleProps> = ({
 
   const Component = as
 
+  const isHexColor = color.startsWith('#') || color.startsWith('rgb')
+
   return (
     <Component
       className={`
@@ -53,9 +56,10 @@ const Title: React.FC<TitleProps> = ({
         leading-none
         tracking-normal
         ${alignClasses[align]}
+        ${!isHexColor ? color : ''} // Aplica classe se não for hex
         ${className}
       `}
-      style={{ color }}
+      style={isHexColor ? { color } : {}}
     >
       {processText(children)}
     </Component>

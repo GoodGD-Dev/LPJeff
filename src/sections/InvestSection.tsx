@@ -2,9 +2,8 @@ import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 
-const Hero: React.FC<HeroProps> = ({
+const InvestSection: React.FC<HeroProps> = ({
   heroImage,
-  statsImage,
   className = '',
   sectionTitle,
   descriptionText
@@ -15,7 +14,7 @@ const Hero: React.FC<HeroProps> = ({
       <div className="flex justify-center mb-8">
         <img
           src={heroImage}
-          alt="Imagem hero"
+          alt="Imagem InvestSection"
           className="w-full max-w-md h-64 object-fit rounded-lg"
         />
       </div>
@@ -33,20 +32,8 @@ const Hero: React.FC<HeroProps> = ({
           {descriptionText}
         </Text>
       </div>
-
-      {/* Estatística com imagem e texto */}
-      <div className="flex items-center justify-center gap-2">
-        <img
-          src={statsImage}
-          alt="Ícone de empresas"
-          className="w-10 h-4  object-contain"
-        />
-        <Text as="span" size="xs" color="rgba(255, 255, 255, 0.7)">
-          +72 empresas atendidas
-        </Text>
-      </div>
     </section>
   )
 }
 
-export default Hero
+export default InvestSection

@@ -145,7 +145,25 @@ interface ImageModalProps {
 }
 
 interface IconProps {
-  type: 'x' | 'check' | 'play' | 'smile' | 'heart' | 'flag' | 'brain' | 'eye'
+  type:
+    | 'x'
+    | 'check'
+    | 'play'
+    | 'smile'
+    | 'heart'
+    | 'flag'
+    | 'brain'
+    | 'eye'
+    | 'chess'
+    | 'pencil-ruler'
+    | 'color-picker'
+    | 'letter-spacing'
+    | 'classify'
+    | 'ai'
+    | 'box'
+    | 'certificate'
+    | 'certificate2'
+    | 'arrow'
   className?: string
   color?: string
 }
@@ -171,7 +189,7 @@ interface TitleProps {
   uppercase?: boolean
   lowercase?: boolean
   bold?: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   align?: 'left' | 'center' | 'right'
   expanded?: boolean
   className?: string

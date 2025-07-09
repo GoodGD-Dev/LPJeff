@@ -54,6 +54,8 @@ const Text: React.FC<TextProps> = ({
 
   const Component = as
 
+  const isHexColor = color.startsWith('#') || color.startsWith('rgb')
+
   // Se for li, renderiza com bullet
   if (as === 'li') {
     return (
@@ -93,9 +95,10 @@ const Text: React.FC<TextProps> = ({
         ${leadingClasses[leading as keyof typeof leadingClasses] || leading} // Usa a prop leading
         tracking-normal
         ${alignClasses[align]}
+        ${!isHexColor ? color : ''}
         ${className}
       `}
-      style={{ color }}
+      style={isHexColor ? { color } : {}}
     >
       {processText(children)}
     </Component>

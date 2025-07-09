@@ -1,5 +1,6 @@
 import { AccordionItemProps } from '@/types/ui'
 import React, { useState, useRef, useEffect } from 'react'
+import Title from './Title'
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
   title,
@@ -8,9 +9,15 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   index,
   openIndex,
   setOpenIndex,
-  backgroundColor = 'bg-gray-900',
+  // Cores padrão (quando fechado)
+  backgroundColor = 'bg-[#202020]',
   titleColor = 'text-white',
   contentColor = 'text-gray-300',
+  iconColor = 'text-[#D9FF85]',
+  // Cores quando aberto
+  openBackgroundColor = 'bg-[#D9FF85]',
+  openTitleColor = 'text-black',
+  openContentColor = 'text-gray-700',
   hoverColor = 'hover:bg-gray-800'
 }) => {
   const isOpen = index === openIndex
@@ -29,17 +36,52 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 
   return (
     <div
-      className={`mb-4 ${backgroundColor} rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto`}
+      className={`
+        mb-4
+        rounded-xl
+        shadow-lg
+        overflow-hidden
+        max-w-2xl
+        mx-auto
+        ${isOpen ? openBackgroundColor : backgroundColor}
+        transition-colors
+        duration-300
+      `}
     >
-      {/* Cabeçalho do Acordeão */}
+      {/* Cabeçalho do Acordeão (o botão clicável) */}
       <button
-        className={`flex items-center justify-between w-full p-6 text-left ${titleColor} focus:outline-none ${hoverColor} transition-colors duration-200`}
+        className={`
+          flex
+          items-center
+          justify-between
+          w-full
+          text-left
+          focus:outline-none
+          ${hoverColor}
+          transition-colors
+          duration-200
+          ${isOpen ? 'px-8 py-2 mt-6' : 'p-8'}
+        `}
         onClick={toggleAccordion}
       >
         <div className="flex items-center">
-          {/* SVG */}
-          {icon && <div className="mr-3 flex-shrink-0">{icon}</div>}
-          <span className="text-lg font-medium">{title}</span>
+          {/* SVG/Ícone - Cor condicional baseada no estado de abertura */}
+          {icon && (
+            <div
+              className={`w-10 h-10 mr-5 flex-shrink-0 ${isOpen ? openTitleColor : iconColor}`}
+            >
+              {icon}
+            </div>
+          )}
+          {/* Título - Alinhado à esquerda e cor condicional */}
+          <Title
+            as="h3"
+            size="xs"
+            align="left"
+            color={isOpen ? openTitleColor : titleColor}
+          >
+            {title}
+          </Title>
         </div>
       </button>
 
@@ -49,7 +91,19 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         className="transition-all duration-300 ease-in-out overflow-hidden"
         style={{ maxHeight: contentHeight }}
       >
-        <div className={`p-6 pt-0 ${contentColor}`}>{children}</div>
+        <div
+          className={`
+            pt-0
+            text-sm
+            font-mosvita
+            leading-5
+            tracking-normal
+            ${isOpen ? openContentColor : contentColor}
+            ${isOpen ? 'px-4 pb-8' : 'px-8 pb-0'} {/* Padding do conteúdo: maior pb quando aberto, menor quando fechado */}
+          `}
+        >
+          {children}
+        </div>
       </div>
     </div>
   )

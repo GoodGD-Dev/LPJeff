@@ -1,13 +1,14 @@
+// src/components/TimelineList.tsx
 import { TimelineColors, TimelineListProps } from '@/types/layout'
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 
 const DEFAULT_COLORS: TimelineColors = {
-  activeCircle: 'bg-green-500',
-  inactiveCircle: 'bg-gray-500',
-  activeLine: 'bg-green-700',
+  activeCircle: 'bg-[#D9FF85]',
+  inactiveCircle: 'bg-[#D9FF85]/60',
+  activeLine: 'bg-[#D9FF85]',
   inactiveLine: 'bg-gray-400',
-  activeText: 'text-white',
-  inactiveText: 'text-gray-300'
+  activeText: 'text-white', // Esta cor é para o texto do item da timeline, não para o número no círculo
+  inactiveText: 'text-gray-300' // Esta cor é para o texto do item da timeline, não para o número no círculo
 }
 
 const TimelineList: React.FC<TimelineListProps> = ({
@@ -104,15 +105,15 @@ const TimelineList: React.FC<TimelineListProps> = ({
                   itemRefs.current[index] = el
                 }}
                 data-index={index}
-                className={`relative flex items-center mb-10 pl-12 transition-opacity duration-500 ${
+                className={`relative flex items-center mb-16 pl-12 transition-opacity duration-500 ${
                   isVisible ? 'opacity-100' : 'opacity-40'
                 }`}
               >
                 {/* Círculo do número */}
                 <div
-                  className={`absolute left-0 top-0.5 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-500 ease-in-out ${
+                  className={`absolute left-0  w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl transition-all duration-500 ease-in-out ${
                     isFullyVisible ? colors.activeCircle : colors.inactiveCircle
-                  } ${isFullyVisible ? colors.activeText : colors.inactiveText}`}
+                  } text-black`}
                 >
                   {index + 1}
                 </div>
@@ -120,11 +121,11 @@ const TimelineList: React.FC<TimelineListProps> = ({
                 {/* Linha vertical */}
                 {index < items.length - 1 && (
                   <div
-                    className={`absolute left-4 w-0.5 transition-all duration-700 ease-in-out origin-top ${
+                    className={`absolute left-5 w-0.5 transition-all duration-700 ease-in-out origin-top ${
                       isLineActive ? colors.activeLine : colors.inactiveLine
                     } ${isLineActive ? 'scale-y-100' : 'scale-y-0'}`}
                     style={{
-                      top: '2.25rem',
+                      top: '2.15rem',
                       height: `${lineHeight}px`
                     }}
                   />
