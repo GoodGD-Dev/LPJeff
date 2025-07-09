@@ -1,9 +1,6 @@
 import { MainLayoutProps } from '@/types/layout'
 import React from 'react'
 
-// ============= TIPOS TYPESCRIPT =============
-
-// ============= COMPONENTE MAIN LAYOUT =============
 const MainLayout: React.FC<MainLayoutProps> = ({ sections = [], children }) => {
   return (
     <div className="min-h-screen">

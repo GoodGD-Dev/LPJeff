@@ -8,21 +8,14 @@ const ImageModal: React.FC<ImageModalProps> = ({
   className = ''
 }) => {
   const [isOpen, setIsOpen] = React.useState(false)
-
-  // Abre modal
   const openModal = () => setIsOpen(true)
-
-  // Fecha modal
   const closeModal = () => setIsOpen(false)
-
-  // Fecha modal ao clicar no backdrop
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       closeModal()
     }
   }
 
-  // Fecha modal ao pressionar ESC
   React.useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -103,41 +96,3 @@ const ImageModal: React.FC<ImageModalProps> = ({
 }
 
 export default ImageModal
-
-/*
-=== EXEMPLO DE USO ===
-
-PROPS OBRIGATÓRIAS:
-- imageSrc: string - URL/caminho da imagem
-
-PROPS OPCIONAIS:
-- imageAlt?: string - Texto alternativo da imagem
-- imageTitle?: string - Título da imagem
-- triggerElement?: React.ReactNode - Elemento customizado para abrir modal
-- className?: string - Classes CSS para o trigger
-
-EXEMPLOS:
-
-// Modal automático (clica na imagem para abrir)
-<ImageModal
-  imageSrc="caminho/da/imagem.jpg"
-  imageTitle="Título da Imagem"
-/>
-
-// Com trigger customizado
-<ImageModal
-  imageSrc="imagem.jpg"
-  triggerElement={
-    <button className="bg-blue-500 text-white px-4 py-2 rounded">
-      Ver Imagem
-    </button>
-  }
-/>
-
-// Com classes no trigger
-<ImageModal
-  imageSrc="imagem.jpg"
-  className="w-32 h-32 rounded-full"
-/>
-
-*/

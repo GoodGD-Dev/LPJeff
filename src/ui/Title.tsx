@@ -40,7 +40,6 @@ const Title: React.FC<TitleProps> = ({
     right: 'text-right'
   }
 
-  // Componente dinâmico
   const Component = as
 
   return (

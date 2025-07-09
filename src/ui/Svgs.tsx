@@ -130,9 +130,6 @@ const Icon: React.FC<IconProps> = ({ type, className = '', color }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`w-full h-full ${className}`}
-      // Remova estas linhas:
-      // width={finalWidth}
-      // height={finalHeight}
     >
       {renderIcon()}
     </svg>
@@ -140,46 +137,3 @@ const Icon: React.FC<IconProps> = ({ type, className = '', color }) => {
 }
 
 export default Icon
-
-/*
-=== EXEMPLO DE USO ===
-
-PROPS OBRIGATÓRIAS:
-- type: 'x' | 'check' | 'play' - Tipo do ícone
-
-PROPS OPCIONAIS:
-- className?: string - Classes CSS extras
-- width?: number - Largura (padrão baseado no tipo)
-- height?: number - Altura (padrão baseado no tipo)
-- color?: string - Cor personalizada (padrão baseado no tipo)
-
-EXEMPLOS:
-
-// Ícone de play com tamanho padrão (61x61) e cor padrão (#D9FF85)
-<Icon type="play" />
-
-// Ícone de play customizado
-<Icon
-  type="play"
-  width={80}
-  height={80}
-  color="#ffffff"
-  className="hover:opacity-80"
-/>
-
-// Ícone de check padrão
-<Icon type="check" />
-
-// Ícone de X com cor customizada
-<Icon type="x" color="#ff0000" />
-
-CORES PADRÃO:
-- play: #D9FF85
-- check: #191919
-- x: #FF8585
-
-DIMENSÕES PADRÃO:
-- play: 61x61px
-- check: 30x31px
-- x: 30x31px
-*/

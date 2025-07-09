@@ -17,12 +17,6 @@ const routesConfig: RouteConfig[] = [
     component: Home,
     title: 'Home - Sua Marca por Intenção'
   }
-  // Adicione mais rotas aqui conforme necessário
-  // {
-  //   path: '/sobre',
-  //   component: About,
-  //   title: 'Sobre Nós'
-  // }
 ]
 
 // ============= COMPONENTE ROUTES =============

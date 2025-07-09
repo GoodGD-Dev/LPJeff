@@ -1,6 +1,6 @@
 import React from 'react'
 import Title from '@ui/Title'
-import Card from '@components/Card'
+import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
 
 const SectionDiff: React.FC<SectionDiffProps> = ({
@@ -24,7 +24,7 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
 
       {/* Cards de comparação */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto">
-        {/* Card Dark - Marca por acaso */}
+        {/* Card Dark*/}
         <Card
           variant="dark"
           icon={<XIcon type="x" />}
@@ -33,7 +33,7 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
           description={cardDarkDescription}
         />
 
-        {/* Card Light - Marca com intenção */}
+        {/* Card Light*/}
         <Card
           variant="light"
           icon={<XIcon type="check" />}

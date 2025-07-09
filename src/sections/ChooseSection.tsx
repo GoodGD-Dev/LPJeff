@@ -1,6 +1,6 @@
 import React from 'react'
 import Title from '@ui/Title'
-import Card from '@components/Card'
+import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
 
 const ChooseSection: React.FC<ChooseSectionProps> = ({
@@ -13,7 +13,7 @@ const ChooseSection: React.FC<ChooseSectionProps> = ({
       {/* Título principal da seção */}
       <div className="text-center mb-8">
         <Title as="h1" size="lg" align="center" color="#ffffff">
-          {sectionTitle} {/* Usa a prop aqui */}
+          {sectionTitle}
         </Title>
       </div>
 
@@ -21,9 +21,9 @@ const ChooseSection: React.FC<ChooseSectionProps> = ({
         {/* Mapeia sobre o array cardsData para renderizar os Cards */}
         {cardsData.map((card, index) => (
           <Card
-            key={index} // Use uma key única, 'id' do card seria melhor se disponível
+            key={index}
             variant={card.variant}
-            icon={<XIcon type={card.iconType} />} // Passa o tipo do ícone
+            icon={<XIcon type={card.iconType} />}
             title={card.title}
             text={card.text}
             listItems={card.listItems}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
 
-// ============= TIPOS TYPESCRIPT =============
 interface RouteVisit {
   id: string
   route: string

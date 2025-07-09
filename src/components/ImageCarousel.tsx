@@ -183,54 +183,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           )
         })}
       </div>
-
-      {/* Dots Indicator - Removido */}
-
-      {/* Progress Bar (opcional) */}
-      {autoPlay && (
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-lime-400 rounded-full transition-all duration-100"
-            style={{
-              width: `${((Date.now() % autoPlayInterval) / autoPlayInterval) * 100}%`
-            }}
-          />
-        </div>
-      )}
     </div>
   )
 }
 
 export default ImageCarousel
-
-/**
- * === EXEMPLO DE USO ===
- *
- * const images = [
- *   {
- *     id: 1,
- *     src: "/path/to/image1.jpg",
- *     alt: "Descrição da imagem 1",
- *     title: "Título da imagem 1"
- *   },
- *   {
- *     id: 2,
- *     src: "/path/to/image2.jpg",
- *     alt: "Descrição da imagem 2",
- *     title: "Título da imagem 2"
- *   }
- * ]
- *
- * // Uso básico
- * <ImageCarousel images={images} />
- *
- * // Com auto-play
- * <ImageCarousel
- *   images={images}
- *   autoPlay={true}
- *   autoPlayInterval={3000}
- * />
- *
- * // Sem modal
- * <ImageCarousel images={images} showModal={false} />
- */

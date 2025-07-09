@@ -52,7 +52,6 @@ const Text: React.FC<TextProps> = ({
     loose: 'leading-loose'
   }
 
-  // Componente dinâmico
   const Component = as
 
   // Se for li, renderiza com bullet

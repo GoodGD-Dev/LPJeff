@@ -23,7 +23,6 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
           {descriptionText}
         </Text>
       </div>
-      {/* TimelineList com items passados via prop */}
       <TimelineList items={timelineItems} />
     </section>
   )

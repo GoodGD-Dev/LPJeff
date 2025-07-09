@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRouter } from '@routes'
 
-// ============= COMPONENTE NOT FOUND PAGE =============
 const NotFoundPage: React.FC = () => {
   const { navigate } = useRouter()
 

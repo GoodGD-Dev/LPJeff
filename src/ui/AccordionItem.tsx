@@ -21,7 +21,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
     if (contentRef.current) {
       setContentHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px')
     }
-  }, [isOpen, children]) // Adicione children como dependência para re-calcular se o conteúdo mudar
+  }, [isOpen, children])
 
   const toggleAccordion = () => {
     setOpenIndex(isOpen ? null : index)
@@ -31,13 +31,13 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
     <div
       className={`mb-4 ${backgroundColor} rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto`}
     >
-      {/* Cabeçalho do Acordeão (Card Arredondado) */}
+      {/* Cabeçalho do Acordeão */}
       <button
         className={`flex items-center justify-between w-full p-6 text-left ${titleColor} focus:outline-none ${hoverColor} transition-colors duration-200`}
         onClick={toggleAccordion}
       >
         <div className="flex items-center">
-          {/* SVG Centralizado dentro do cabeçalho */}
+          {/* SVG */}
           {icon && <div className="mr-3 flex-shrink-0">{icon}</div>}
           <span className="text-lg font-medium">{title}</span>
         </div>

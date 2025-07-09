@@ -20,7 +20,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [internalIsPlaying, setInternalIsPlaying] = useState(isPlaying)
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Memoizar classe de aspect ratio
+  // Memorizar classe de aspect ratio
   const aspectRatioClass = useMemo(() => {
     const aspectRatioMap = {
       '16:9': 'aspect-video',
@@ -30,14 +30,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return aspectRatioMap[aspectRatio] || 'aspect-square'
   }, [aspectRatio])
 
-  // Memoizar formatação de tempo
+  // Memorizar formatação de tempo
   const formatTime = useCallback((time: number) => {
     const minutes = Math.floor(time / 60)
     const seconds = Math.floor(time % 60)
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
   }, [])
 
-  // Memoizar percentual de progresso
+  // Memorizar percentual de progresso
   const progressPercentage = useMemo(() => {
     return duration > 0 ? (currentTime / duration) * 100 : 0
   }, [currentTime, duration])
