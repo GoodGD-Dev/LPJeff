@@ -1,5 +1,5 @@
 import { ButtonProps } from '@/types/ui'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -10,8 +10,32 @@ const Button: React.FC<ButtonProps> = ({
   expanded = false,
   disabled = false,
   onClick,
-  className = ''
+  className = '',
+  targetSection,
+  fixed = false,
+  position = 'bottom-right',
+  hideOnSection = false
 }) => {
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    if (!hideOnSection || !targetSection || !fixed) return
+
+    const handleScroll = () => {
+      const targetElement = document.getElementById(targetSection)
+      if (!targetElement) return
+
+      const rect = targetElement.getBoundingClientRect()
+      const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0
+
+      setIsVisible(!isInViewport)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Executa uma vez para verificar estado inicial
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [hideOnSection, targetSection, fixed])
   // Mapeamento de tamanhos
   const sizeClasses = {
     sm: {
@@ -37,11 +61,40 @@ const Button: React.FC<ButtonProps> = ({
     }
   }
 
+  // Mapeamento de posições para botões fixos
+  const positionClasses = {
+    'bottom-right': 'bottom-6 right-6',
+    'bottom-left': 'bottom-6 left-6',
+    'top-right': 'top-6 right-6',
+    'top-left': 'top-6 left-6',
+    'bottom-center': 'bottom-6 left-1/2 transform -translate-x-1/2',
+    'top-center': 'top-6 left-1/2 transform -translate-x-1/2',
+    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+  }
+
   const currentSize = sizeClasses[size]
+
+  // Função para navegar para uma seção
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (targetSection) {
+      const element = document.getElementById(targetSection)
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
+    }
+
+    // Chama o onClick personalizado se fornecido
+    if (onClick) {
+      onClick(e)
+    }
+  }
 
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       className={`
         ${currentSize.width}
@@ -56,7 +109,10 @@ const Button: React.FC<ButtonProps> = ({
         tracking-normal
         text-center
         flex items-center justify-center gap-2.5
-        transition-all duration-200
+        transition-all duration-300
+        ${fixed ? 'fixed z-50' : ''}
+        ${fixed ? positionClasses[position] : ''}
+        ${fixed && hideOnSection ? (isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none') : ''}
         ${
           disabled
             ? 'opacity-50 cursor-not-allowed'
@@ -70,8 +126,7 @@ const Button: React.FC<ButtonProps> = ({
       }}
     >
       {/* Ícone SVG */}
-      {icon && <span className="flex-shrink-0">{icon}</span>}
-
+      {icon && <span className="flex-shrink-0 w-5 h-5">{icon}</span>}
       {/* Texto do botão */}
       <span className="flex-1">{children}</span>
     </button>

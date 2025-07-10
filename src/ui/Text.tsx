@@ -1,9 +1,10 @@
+import { TextProps } from '@/types'
 import React from 'react'
 
 const Text: React.FC<TextProps> = ({
   children,
   as = 'p',
-  color = '#ffffff',
+  color = '',
   bulletColor,
   uppercase = false,
   lowercase = false,
@@ -11,7 +12,7 @@ const Text: React.FC<TextProps> = ({
   align = as === 'li' ? 'left' : 'center',
   expanded = false,
   leading = 'normal',
-  className = ''
+  className = 'text-text-muted'
 }) => {
   // Função para processar quebras de linha
   const processText = (text: React.ReactNode) => {

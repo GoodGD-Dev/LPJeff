@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import VideoPlayer from '@ui/VideoModal'
+import { Video } from '@types'
 
 interface VideoCarouselModalProps {
   videos: Video[]
@@ -93,14 +94,14 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
     <>
       <button
         onClick={handlePrevSlide}
-        className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 ml-2 opacity-75 hover:opacity-100 transition-opacity"
+        className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-secondary-light text-text p-2 rounded-full z-40 ml-2 opacity-75 hover:opacity-100 transition-opacity"
         aria-label="Slide anterior"
       >
         &#10094;
       </button>
       <button
         onClick={handleNextSlide}
-        className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-40 mr-2 opacity-75 hover:opacity-100 transition-opacity"
+        className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-secondary-light text-text p-2 rounded-full z-40 mr-2 opacity-75 hover:opacity-100 transition-opacity"
         aria-label="Próximo slide"
       >
         &#10095;
@@ -110,15 +111,15 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
 
   // Componente de loading extraído
   const LoadingSpinner = () => (
-    <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-10 text-white">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-lime-400"></div>
+    <div className="absolute inset-0 flex items-center justify-center bg-secondary-light z-10 text-text">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-primary"></div>
       <span className="sr-only">Carregando vídeo...</span>
     </div>
   )
 
   // Componente de erro extraído
   const ErrorMessage = () => (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-red-800/80 text-white p-4 text-center z-10">
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-red-800/80 text-text p-4 text-center z-10">
       <p className="text-lg font-bold mb-2">Erro!</p>
       <p className="text-sm">Não foi possível carregar o vídeo.</p>
       <p className="text-xs mt-1">Verifique a URL ou sua conexão.</p>

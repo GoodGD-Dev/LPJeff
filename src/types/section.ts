@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { BaseSectionProps, BaseProps, Spacing } from './common'
+import { BaseSectionProps, Spacing } from './common'
 import { CardListItem, CardData } from './card'
 import { CarouselData, Video } from './media'
 
@@ -47,4 +47,14 @@ export interface VideoCarouselSectionProps extends BaseSectionProps {
 export interface VideoSectionProps extends BaseSectionProps {
   videoSrc: string
   thumbnail: string
+}
+
+export interface AccordionSectionProps {
+  className?: string
+  sectionTitle: string | ReactNode
+  descriptionText: string | ReactNode
+  accordionItems: Array<{
+    title: string
+    content: React.ReactNode
+  }>
 }

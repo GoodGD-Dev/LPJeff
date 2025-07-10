@@ -6,6 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        text: '#FFFFFF',
+        'text-muted': 'rgba(255, 255, 255, 0.6)',
+        primary: '#D9FF85',
+        secondary: '#191919',
+        border: '#2C2C2C',
+        'secondary-light': '#202020',
+      },
       fontFamily: {
         'mosvita': ['Mosvita', 'sans-serif'],
         'mosvita-expanded': ['Mosvita Expanded', 'sans-serif'],

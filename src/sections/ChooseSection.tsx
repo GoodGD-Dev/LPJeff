@@ -2,6 +2,7 @@ import React from 'react'
 import Title from '@ui/Title'
 import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
+import { ChooseSectionProps } from '@/types'
 
 const ChooseSection: React.FC<ChooseSectionProps> = ({
   className = '',
@@ -9,10 +10,10 @@ const ChooseSection: React.FC<ChooseSectionProps> = ({
   cardsData
 }) => {
   return (
-    <section className={`w-full max-w-6xl mx-auto px-4 py-16 ${className}`}>
+    <>
       {/* Título principal da seção */}
       <div className="text-center mb-8">
-        <Title as="h1" size="lg" align="center" color="#ffffff">
+        <Title as="h1" size="lg">
           {sectionTitle}
         </Title>
       </div>
@@ -30,7 +31,7 @@ const ChooseSection: React.FC<ChooseSectionProps> = ({
           />
         ))}
       </div>
-    </section>
+    </>
   )
 }
 

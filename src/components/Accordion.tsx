@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import AccordionItem from '@ui/AccordionItem'
+import { AccordionProps } from '@types'
 
 const Accordion: React.FC<AccordionProps> = ({
   allowMultipleOpen = false,

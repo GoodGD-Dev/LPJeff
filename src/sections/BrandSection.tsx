@@ -1,3 +1,4 @@
+import { BrandIntentionSectionProps, CardListItem } from '@/types'
 import Icon from '@/ui/Svgs'
 import CardList from '@components/CardList'
 import Title from '@ui/Title'
@@ -12,34 +13,34 @@ const BrandIntentionSection: React.FC<BrandIntentionSectionProps> = ({
     {
       id: '1',
       icon: <Icon type="smile" />,
-      text: 'Atrai o público que você quer\ne repele o que só busca preço'
+      text: 'test1'
     },
     {
       id: '2',
       icon: <Icon type="heart" />,
-      text: 'Gera conexão emocional,\nnão apenas transações'
+      text: 'test2'
     },
     {
       id: '3',
       icon: <Icon type="flag" />,
-      text: 'Justifica seu valor e te tira da guerra com a concorrência'
+      text: 'test3'
     },
     {
       id: '4',
       icon: <Icon type="brain" />,
-      text: 'Cria uma experiência memorável em cada ponto de contato'
+      text: 'test4'
     },
     {
       id: '5',
       icon: <Icon type="eye" />,
-      text: 'Transforma clientes em fãs e admiradores da sua marca'
+      text: 'test5'
     }
   ]
 
   const currentListItems = propListItems || defaultListItems
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 py-16">
+    <>
       {/* Título da seção */}
       <div className="mb-8">
         <Title as="h1" align="center">
@@ -51,7 +52,7 @@ const BrandIntentionSection: React.FC<BrandIntentionSectionProps> = ({
       <div className="flex justify-center">
         <CardList items={currentListItems} className="mx-auto" />
       </div>
-    </section>
+    </>
   )
 }
 

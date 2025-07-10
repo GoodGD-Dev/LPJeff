@@ -2,6 +2,7 @@ import React from 'react'
 import Title from '@ui/Title'
 import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
+import { SectionDiffProps } from '@/types'
 
 const SectionDiff: React.FC<SectionDiffProps> = ({
   className = '',
@@ -14,12 +15,10 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
   cardLightDescription
 }) => {
   return (
-    <section className={`w-full max-w-6xl mx-auto px-4 py-16 ${className}`}>
+    <>
       {/* Título principal */}
       <div className="text-center mb-8">
-        <Title as="h1" size="lg" align="center" color="#ffffff">
-          {sectionTitle}
-        </Title>
+        <Title>{sectionTitle}</Title>
       </div>
 
       {/* Cards de comparação */}
@@ -42,7 +41,7 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
           description={cardLightDescription}
         />
       </div>
-    </section>
+    </>
   )
 }
 

@@ -43,15 +43,27 @@ export interface AccordionItemProps {
 }
 
 export interface ButtonProps {
-  children: ReactNode
-  icon?: ReactNode
+  children?: React.ReactNode
+  icon?: React.ReactNode
   bgColor?: string
   textColor?: string
-  size?: ButtonSize
+  size?: 'sm' | 'md' | 'lg'
   expanded?: boolean
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   className?: string
+  targetSection?: string // ID da seção para navegar
+  fixed?: boolean // Se o botão deve ser fixo
+  position?:
+    | 'bottom-right'
+    | 'bottom-left'
+    | 'top-right'
+    | 'top-left'
+    | 'bottom-center'
+    | 'top-center'
+    | 'center'
+
+  hideOnSection?: boolean // Se deve ocultar quando estiver na seção de destino
 }
 
 export interface CardListProps {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import ImageModal from '@ui/ImageModal'
+import { ImageCarouselProps } from '@types'
 
 // Navigation Icons
 const ChevronLeftIcon = () => (
@@ -107,9 +108,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <button
           onClick={goToPrev}
           className="absolute left-2 top-1/2 -translate-y-1/2 z-40
-                     bg-gray-800/80 hover:bg-gray-800 text-lime-400
+                     bg-secondary hover:bg-secondary text-primary
                      p-3 rounded-full transition-all duration-300
-                     focus:outline-none focus:ring-2 focus:ring-lime-400
+                     focus:outline-none focus:ring-2 focus:ring-primary
                      opacity-70 hover:opacity-100"
           aria-label="Imagem anterior"
         >
@@ -121,9 +122,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <button
           onClick={goToNext}
           className="absolute right-2 top-1/2 -translate-y-1/2 z-40
-                     bg-gray-800/80 hover:bg-gray-800 text-lime-400
+                     bg-secondary hover:bg-secondary text-primary
                      p-3 rounded-full transition-all duration-300
-                     focus:outline-none focus:ring-2 focus:ring-lime-400
+                     focus:outline-none focus:ring-2 focus:ring-primary
                      opacity-70 hover:opacity-100"
           aria-label="Próxima imagem"
         >
@@ -146,7 +147,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 className={`
                   relative rounded-xl overflow-hidden shadow-2xl
                   transition-all duration-300 ease-in-out transform-gpu will-change-transform
-                  bg-gray-800 flex items-center justify-center
+                  bg-secondary flex items-center justify-center
                   aspect-square w-full max-w-[380px] md:max-w-[480px] lg:max-w-[580px]
                   ${
                     isActive

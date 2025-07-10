@@ -1,3 +1,4 @@
+import { IconProps } from '@/types'
 import React from 'react'
 
 const Icon: React.FC<IconProps> = ({ type, className = '', color }) => {
@@ -9,6 +10,16 @@ const Icon: React.FC<IconProps> = ({ type, className = '', color }) => {
       case 'check':
         return '#191919'
       case 'play':
+        return '#D9FF85'
+      case 'smile':
+        return '#D9FF85'
+      case 'heart':
+        return '#D9FF85'
+      case 'flag':
+        return '#D9FF85'
+      case 'brain':
+        return '#D9FF85'
+      case 'eye':
         return '#D9FF85'
       default:
         return 'currentColor'

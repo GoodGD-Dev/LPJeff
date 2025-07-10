@@ -1,3 +1,4 @@
+import { ImageModalProps } from '@/types'
 import React from 'react'
 
 const ImageModal: React.FC<ImageModalProps> = ({
@@ -53,7 +54,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
       {/* Modal */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-secondary bg-opacity-90 backdrop-blur-sm p-4"
           onClick={handleBackdropClick}
         >
           {/* Container do Modal */}
@@ -61,7 +62,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
             {/* Botão de fechar */}
             <button
               onClick={closeModal}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              className="absolute -top-12 right-0 text-text hover:text-text-muted transition-colors z-10"
             >
               <svg
                 width="32"
@@ -75,7 +76,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
             {/* Título */}
             {imageTitle && (
-              <h2 className="text-white text-xl font-mosvita font-semibold mb-4 text-center">
+              <h2 className="text-text text-xl font-mosvita font-semibold mb-4 text-center">
                 {imageTitle}
               </h2>
             )}

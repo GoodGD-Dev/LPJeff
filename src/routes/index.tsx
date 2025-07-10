@@ -1,3 +1,4 @@
+// src/routes/index.tsx
 import React, { useState, useEffect, createContext, useContext } from 'react'
 
 interface RouteVisit {
@@ -38,7 +39,9 @@ export const useRouter = () => {
 export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
-  const [currentRoute, setCurrentRoute] = useState('/')
+  const [currentRoute, setCurrentRoute] = useState(
+    () => window.location.pathname
+  )
   const [analytics, setAnalytics] = useState<AnalyticsData>({
     totalVisits: 0,
     uniqueVisitors: 0,
@@ -47,7 +50,6 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
     visits: []
   })
 
-  // Função para detectar fonte automaticamente
   const detectSource = (): string => {
     const params = new URLSearchParams(window.location.search)
     const utmSource = params.get('utm_source')
@@ -56,7 +58,6 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
     if (utmSource) return utmSource
     if (ref) return ref
 
-    // Simular detecção de referrer
     const referrer = document.referrer
     if (referrer.includes('instagram.com')) return 'instagram'
     if (referrer.includes('facebook.com')) return 'facebook'
@@ -69,8 +70,9 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
     return referrer ? 'external' : 'direct'
   }
 
-  // Função para navegar
   const navigate = (route: string, source?: string) => {
+    window.history.pushState({}, '', route)
+
     const detectedSource = source || detectSource()
     const visit: RouteVisit = {
       id: Date.now().toString(),
@@ -88,7 +90,6 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
       sourceStats[detectedSource] = (sourceStats[detectedSource] || 0) + 1
       routeStats[route] = (routeStats[route] || 0) + 1
 
-      // Calcular visitantes únicos (simplificado por userAgent)
       const uniqueVisitors = new Set(newVisits.map((v) => v.userAgent)).size
 
       return {
@@ -103,9 +104,21 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
     setCurrentRoute(route)
   }
 
-  // Inicializar com visita da página inicial
   useEffect(() => {
-    navigate('/', detectSource())
+    const handlePopState = () => {
+      setCurrentRoute(window.location.pathname)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [])
+
+  useEffect(() => {
+    const initialRoute = window.location.pathname
+    navigate(initialRoute, detectSource())
   }, [])
 
   return (

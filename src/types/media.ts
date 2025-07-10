@@ -1,14 +1,17 @@
+import { ReactNode } from 'react'
 import { BaseItem, AspectRatio } from './common'
 
 // Tipos para imagens
-export interface ImageItem extends BaseItem {
+export interface ImageItem {
+  id: number | string
   src: string
   alt: string
   title?: string
 }
 
 // Tipos para vídeos
-export interface Video extends BaseItem {
+export interface Video {
+  id: number
   src: string
   thumbnailSrc?: string
   title?: string
@@ -35,7 +38,7 @@ export interface ImageModalProps {
   imageSrc: string
   imageAlt?: string
   imageTitle?: string
-  triggerElement?: React.ReactNode
+  triggerElement?: ReactNode
   className?: string
 }
 

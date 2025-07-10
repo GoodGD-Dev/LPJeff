@@ -1,6 +1,7 @@
 import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
+import { CardProps } from '@/types'
 
 const Card: React.FC<CardProps> = ({
   icon,
@@ -12,39 +13,37 @@ const Card: React.FC<CardProps> = ({
   className = '',
   variant = 'dark'
 }) => {
-  const variants = {
+  const variantClasses = {
     dark: {
-      cardBg: '#202020',
-      cardBorder: '#2C2C2C',
-      titleColor: '#FFFFFF',
-      textColor: 'rgba(255, 255, 255, 0.6)',
-      iconColor: 'text-white'
+      cardBg: 'bg-secondary-light',
+      cardBorder: 'border-border',
+      titleColor: 'text-text',
+      textColor: 'text-text-muted',
+      iconColor: 'text-text'
     },
     light: {
-      cardBg: '#D9FF85',
-      cardBorder: '#D9FF85',
-      titleColor: '#191919',
-      textColor: 'rgba(25, 25, 25, 0.6)',
+      cardBg: 'bg-primary',
+      cardBorder: 'border-primary',
+      titleColor: 'text-secondary',
+      textColor: 'text-[rgba(25,25,25,0.6)]',
       iconColor: 'text-black'
     }
   }
 
-  const currentVariant = variants[variant]
+  const currentClasses = variantClasses[variant]
 
   return (
     <div
       className={`border rounded-2xl p-8 space-y-6
         w-full max-w-[343px] min-h-[280px]
         sm:w-[343px]
+        ${currentClasses.cardBg}
+        ${currentClasses.cardBorder}
         ${className}`}
-      style={{
-        backgroundColor: currentVariant.cardBg,
-        borderColor: currentVariant.cardBorder
-      }}
     >
-      {/* SVG decorativo no topo esquerdo */}
+      {/* SVG */}
       {icon && (
-        <div className={`${currentVariant.iconColor} w-6 h-6`}>{icon}</div>
+        <div className={`${currentClasses.iconColor} w-6 h-6`}>{icon}</div>
       )}
 
       {/* Título */}
@@ -54,7 +53,7 @@ const Card: React.FC<CardProps> = ({
         align="left"
         bold
         uppercase
-        color={currentVariant.titleColor}
+        className={currentClasses.titleColor}
       >
         {title}
       </Title>
@@ -62,7 +61,7 @@ const Card: React.FC<CardProps> = ({
       {/* Text */}
       <div className="space-y-2">
         {text && (
-          <Text as="p" align="left" color={currentVariant.textColor}>
+          <Text as="p" align="left" className={currentClasses.textColor}>
             {text}
           </Text>
         )}
@@ -74,8 +73,7 @@ const Card: React.FC<CardProps> = ({
               <Text
                 key={index}
                 as="li"
-                color={currentVariant.textColor}
-                bulletColor={currentVariant.textColor}
+                className={currentClasses.textColor}
                 align="left"
               >
                 {item}
@@ -87,7 +85,12 @@ const Card: React.FC<CardProps> = ({
 
       {/* Descrição*/}
       {description && (
-        <Text as="p" align="left" color={currentVariant.textColor}>
+        <Text
+          as="p"
+          align="left"
+          // Aqui passamos a classe de cor para o componente Text
+          className={currentClasses.textColor}
+        >
           {description}
         </Text>
       )}

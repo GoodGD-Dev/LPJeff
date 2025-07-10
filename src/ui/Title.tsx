@@ -1,16 +1,17 @@
+import { TitleProps } from '@/types'
 import React from 'react'
 
 const Title: React.FC<TitleProps> = ({
   children,
   as = 'h1',
-  color = '#ffffff',
+  color = '',
   uppercase = false,
   lowercase = false,
   bold = false,
   size = 'md',
   align = 'center',
   expanded = false,
-  className = ''
+  className = 'text-text'
 }) => {
   // Função para processar quebras de linha
   const processText = (text: React.ReactNode) => {
@@ -56,7 +57,7 @@ const Title: React.FC<TitleProps> = ({
         leading-none
         tracking-normal
         ${alignClasses[align]}
-        ${!isHexColor ? color : ''} // Aplica classe se não for hex
+        ${!isHexColor ? color : ''}
         ${className}
       `}
       style={isHexColor ? { color } : {}}

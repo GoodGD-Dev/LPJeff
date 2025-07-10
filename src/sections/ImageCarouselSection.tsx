@@ -1,6 +1,7 @@
 import React from 'react'
 import Title from '@ui/Title'
 import ImageCarousel from '@components/ImageCarousel'
+import { ImageCarouselSectionProps } from '@/types'
 
 const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
   sectionTitle,
@@ -18,29 +19,25 @@ const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
   }
 
   return (
-    <section className={`w-full py-2 lg:py-16 ${sectionClassName}`}>
-      <div className="container mx-auto">
-        <div className="mb-8">
-          <Title as="h1" align="center">
-            {sectionTitle}
-          </Title>
-        </div>
-
-        {/* Carousels */}
-        <div className={`${spacingClasses[spacing]}`}>
-          {carousels.map((carousel) => (
-            <div key={carousel.id} className="w-full">
-              <ImageCarousel
-                images={carousel.images}
-                showModal={carousel.showModal}
-                autoPlay={carousel.autoPlay}
-                autoPlayInterval={carousel.autoPlayInterval}
-              />
-            </div>
-          ))}
-        </div>
+    <>
+      <div className="mb-8">
+        <Title>{sectionTitle}</Title>
       </div>
-    </section>
+
+      {/* Carousels */}
+      <div className={`${spacingClasses[spacing]}`}>
+        {carousels.map((carousel) => (
+          <div key={carousel.id} className="w-full">
+            <ImageCarousel
+              images={carousel.images}
+              showModal={carousel.showModal}
+              autoPlay={carousel.autoPlay}
+              autoPlayInterval={carousel.autoPlayInterval}
+            />
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 

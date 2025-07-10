@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
-import TimelineList from '@/components/TimelineList'
-import { ProcessStepsSectionProps } from '@/types'
+import Accordion from '@/components/Accordion'
+import { AccordionSectionProps } from '@/types'
 
-const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
+const AccordionSection: React.FC<AccordionSectionProps> = ({
+  className = '',
   sectionTitle,
   descriptionText,
-  timelineItems,
-  className = ''
+  accordionItems
 }) => {
   return (
     <>
@@ -24,9 +24,9 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
           {descriptionText}
         </Text>
       </div>
-      <TimelineList items={timelineItems} />
+      <Accordion items={accordionItems} />
     </>
   )
 }
 
-export default ProcessStepsSection
+export default AccordionSection

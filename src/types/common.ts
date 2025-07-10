@@ -15,6 +15,7 @@ export interface BaseSectionProps extends BaseProps {
 
 // Tipos para variações de componentes
 export type Variant = 'dark' | 'light'
+
 export type IconType =
   | 'x'
   | 'check'
@@ -24,14 +25,26 @@ export type IconType =
   | 'flag'
   | 'brain'
   | 'eye'
+  | 'chess'
+  | 'pencil-ruler'
+  | 'color-picker'
+  | 'letter-spacing'
+  | 'classify'
+  | 'ai'
+  | 'box'
+  | 'certificate'
+  | 'certificate2'
+  | 'arrow'
+
 export type Spacing = 'default' | 'sm' | 'md' | 'lg' | 'xl'
 export type TextAlign = 'left' | 'center' | 'right'
 export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type TitleSize = 'sm' | 'md' | 'lg' | 'xl'
+export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'span'
 export type TextTag = 'p' | 'span' | 'li'
 export type AspectRatio = '1:1' | '16:9' | '9:16'
 export type ButtonSize = 'sm' | 'md' | 'lg'
+
 export type Leading =
   | 'none'
   | 'tight'
