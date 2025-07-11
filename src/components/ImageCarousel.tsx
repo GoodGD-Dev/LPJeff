@@ -113,7 +113,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                      opacity-70 hover:opacity-100"
           aria-label="Imagem anterior"
         >
-          <Icon type="arrow" className="w-7 h-7 scale-x-[-1]" />
+          <Icon type="arrow" className="w-5 h-5 scale-x-[-1]" />
         </button>
       )}
 
@@ -127,7 +127,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                      opacity-70 hover:opacity-100"
           aria-label="Próxima imagem"
         >
-          <Icon type="arrow" className="w-7 h-7" />
+          <Icon type="arrow" className="w-5 h-5" />
         </button>
       )}
 
