@@ -27,7 +27,6 @@ const Button: React.FC<ButtonProps> = ({
 
       const rect = targetElement.getBoundingClientRect()
       const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0
-
       setIsVisible(!isInViewport)
     }
 
@@ -36,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [hideOnSection, targetSection, fixed])
+
   // Mapeamento de tamanhos
   const sizeClasses = {
     sm: {
@@ -104,11 +104,9 @@ const Button: React.FC<ButtonProps> = ({
         ${expanded ? 'font-mosvita-expanded' : 'font-mosvita'}
         ${currentSize.text}
         font-medium
-        uppercase
         leading-none
         tracking-normal
-        text-center
-        flex items-center justify-center gap-2.5
+        flex items-center justify-center
         transition-all duration-300
         ${fixed ? 'fixed z-50' : ''}
         ${fixed ? positionClasses[position] : ''}
@@ -125,10 +123,13 @@ const Button: React.FC<ButtonProps> = ({
         color: textColor
       }}
     >
-      {/* Ícone SVG */}
-      {icon && <span className="flex-shrink-0 w-5 h-5">{icon}</span>}
-      {/* Texto do botão */}
-      <span className="flex-1">{children}</span>
+      {/* Container interno para centralizar SVG e texto */}
+      <div className="flex items-center justify-center gap-2">
+        {/* Ícone SVG */}
+        {icon && <span className="flex-shrink-0 w-6 h-6">{icon}</span>}
+        {/* Texto do botão */}
+        <span>{children}</span>
+      </div>
     </button>
   )
 }

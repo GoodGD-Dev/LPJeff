@@ -17,7 +17,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   // Cores quando aberto
   openBackgroundColor = 'bg-primary',
   openTitleColor = 'text-black',
-  openContentColor = 'text-secondary-light',
+  openContentColor = 'text-secondary/60',
   hoverColor = 'hover:bg-secondary-light'
 }) => {
   const isOpen = index === openIndex
@@ -63,7 +63,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           {icon && (
             <div
               className={`
-                w-10 h-10 mr-5 flex-shrink-0
+                w-7 h-7 mr-5 flex-shrink-0
                 ${isOpen ? openTitleColor : iconColor}
                 transition-colors duration-150 ease-in-out
               `}
@@ -78,7 +78,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             align="left"
             className={`
               ${isOpen ? openTitleColor : titleColor}
-              transition-colors duration-150 ease-in-out
+              transition-colors duration-150 ease-in-out font-medium
             `}
           >
             {title}
@@ -95,6 +95,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         <div
           className={`
             pt-0
+            font-medium
             text-sm
             font-mosvita
             leading-5

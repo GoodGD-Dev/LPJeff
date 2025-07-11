@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 import Accordion from '@/components/Accordion'
-import { AccordionSectionProps } from '@/types'
+import { DeliverablesProps } from '@/types'
 
-const AccordionSection: React.FC<AccordionSectionProps> = ({
+const Deliverables: React.FC<DeliverablesProps> = ({
   className = '',
   sectionTitle,
   descriptionText,
@@ -20,13 +20,11 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
       </div>
       {/* Texto descritivo */}
       <div className="mb-10">
-        <Text size="lg" align="center">
-          {descriptionText}
-        </Text>
+        <Text align="center">{descriptionText}</Text>
       </div>
       <Accordion items={accordionItems} />
     </>
   )
 }
 
-export default AccordionSection
+export default Deliverables

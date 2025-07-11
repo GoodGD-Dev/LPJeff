@@ -2,9 +2,9 @@ import React from 'react'
 import Title from '@ui/Title'
 import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
-import { ChooseSectionProps } from '@/types'
+import { ComparisonProps } from '@/types'
 
-const ChooseSection: React.FC<ChooseSectionProps> = ({
+const Comparison: React.FC<ComparisonProps> = ({
   className = '',
   sectionTitle,
   cardsData
@@ -35,4 +35,4 @@ const ChooseSection: React.FC<ChooseSectionProps> = ({
   )
 }
 
-export default ChooseSection
+export default Comparison

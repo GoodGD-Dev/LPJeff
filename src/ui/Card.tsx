@@ -43,7 +43,7 @@ const Card: React.FC<CardProps> = ({
     >
       {/* SVG */}
       {icon && (
-        <div className={`${currentClasses.iconColor} w-6 h-6`}>{icon}</div>
+        <div className={`${currentClasses.iconColor} w-8 h-8`}>{icon}</div>
       )}
 
       {/* Título */}
@@ -68,7 +68,7 @@ const Card: React.FC<CardProps> = ({
 
         {/* Lista de itens*/}
         {listItems.length > 0 && (
-          <ul className="space-y-2">
+          <ul className="space-y-1">
             {listItems.map((item, index) => (
               <Text
                 key={index}

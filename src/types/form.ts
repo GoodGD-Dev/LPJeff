@@ -1,17 +1,25 @@
 import { ReactNode, InputHTMLAttributes } from 'react'
+import { FormFieldType, InputVariant } from './common'
 import { ButtonProps } from './ui'
+
+// Interfaces de dados de formulário
+export interface SelectOption {
+  value: string
+  label: string
+}
 
 export interface FormField {
   name: string
   label: string
-  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select'
+  type: FormFieldType
   placeholder?: string
-  variant?: 'default' | 'larger'
+  variant?: InputVariant
   initialValue?: string
-  options?: { value: string; label: string }[]
+  options?: SelectOption[]
   className?: string
 }
 
+// Props para componentes de formulário
 export interface FormProps {
   fields: FormField[]
   submitButtonText: string
@@ -23,7 +31,7 @@ export interface FormProps {
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'default' | 'larger'
+  variant?: InputVariant
   label?: string
   errorMessage?: string
 }

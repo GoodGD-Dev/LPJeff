@@ -1,5 +1,5 @@
 import React from 'react'
-import FormSection from '@/sections/FormSection'
+import FormSection from '@/sections/ContactSection'
 import { FormField } from '@/types'
 import Icon from '@/ui/Svgs'
 

@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
-import VideoPlayer from '@ui/VideoModal'
 import { Video } from '@types'
+import { VideoModal } from '@ui'
+import 'keen-slider/keen-slider.min.css'
 
 interface VideoCarouselModalProps {
   videos: Video[]
@@ -169,7 +169,7 @@ const VideoCarouselModal: React.FC<VideoCarouselModalProps> = ({ videos }) => {
                 {status?.error ? (
                   <ErrorMessage />
                 ) : (
-                  <VideoPlayer
+                  <VideoModal
                     videoSrc={video.src}
                     title={video.title}
                     thumbnail={video.thumbnailSrc}

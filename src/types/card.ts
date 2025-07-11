@@ -1,13 +1,12 @@
 import { ReactNode } from 'react'
 import { BaseItem, Variant, IconType } from './common'
 
-// Tipos para itens de lista em cards
+// Interfaces de dados de cards
 export interface CardListItem extends BaseItem {
   icon: ReactNode
   text: string
 }
 
-// Tipos para dados de cards
 export interface CardData {
   variant: Variant
   iconType: IconType
@@ -26,4 +25,9 @@ export interface CardProps {
   children?: ReactNode
   className?: string
   variant?: Variant
+}
+
+export interface CardListProps {
+  items: CardListItem[]
+  className?: string
 }

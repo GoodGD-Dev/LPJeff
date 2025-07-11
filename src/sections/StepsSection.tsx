@@ -2,9 +2,9 @@ import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 import TimelineList from '@/components/TimelineList'
-import { ProcessStepsSectionProps } from '@/types'
+import { StepsProps } from '@/types'
 
-const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
+const Steps: React.FC<StepsProps> = ({
   sectionTitle,
   descriptionText,
   timelineItems,
@@ -29,4 +29,4 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
   )
 }
 
-export default ProcessStepsSection
+export default Steps

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
-import ImageModal from '@ui/ImageModal'
 import { ImageCarouselProps } from '@types'
+import { Icon } from '@ui'
+import 'keen-slider/keen-slider.min.css'
 
 // Navigation Icons
 const ChevronLeftIcon = () => (
@@ -107,14 +107,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
       {canGoPrev && (
         <button
           onClick={goToPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-40
-                     bg-secondary hover:bg-secondary text-primary
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-40 hover:bg-secondary text-primary
                      p-3 rounded-full transition-all duration-300
-                     focus:outline-none focus:ring-2 focus:ring-primary
+                     focus:outline-none
                      opacity-70 hover:opacity-100"
           aria-label="Imagem anterior"
         >
-          <ChevronLeftIcon />
+          <Icon type="arrow" className="w-7 h-7 scale-x-[-1]" />
         </button>
       )}
 
@@ -122,13 +121,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <button
           onClick={goToNext}
           className="absolute right-2 top-1/2 -translate-y-1/2 z-40
-                     bg-secondary hover:bg-secondary text-primary
+                     hover:bg-secondary text-primary
                      p-3 rounded-full transition-all duration-300
-                     focus:outline-none focus:ring-2 focus:ring-primary
+                     focus:outline-none
                      opacity-70 hover:opacity-100"
           aria-label="Próxima imagem"
         >
-          <ChevronRightIcon />
+          <Icon type="arrow" className="w-7 h-7" />
         </button>
       )}
 
@@ -156,29 +155,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   }
                 `}
               >
-                {showModal ? (
-                  <ImageModal
-                    imageSrc={image.src}
-                    imageAlt={image.alt}
-                    imageTitle={image.title}
-                    triggerElement={
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                    }
-                    className="w-full h-full"
-                  />
-                ) : (
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                )}
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             </div>
           )

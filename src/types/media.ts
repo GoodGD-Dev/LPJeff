@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import { BaseItem, AspectRatio } from './common'
+import { AspectRatio } from './common'
 
-// Tipos para imagens
+// Interfaces de dados de mídia
 export interface ImageItem {
   id: number | string
   src: string
@@ -9,7 +9,6 @@ export interface ImageItem {
   title?: string
 }
 
-// Tipos para vídeos
 export interface Video {
   id: number
   src: string
@@ -17,7 +16,6 @@ export interface Video {
   title?: string
 }
 
-// Tipos para carrossel de imagens
 export interface CarouselData {
   id: string
   images: ImageItem[]

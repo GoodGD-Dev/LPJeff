@@ -1,13 +1,9 @@
 import React from 'react'
 import Title from '@ui/Title'
 import VideoPlayer from '@ui/VideoModal'
-import { VideoSectionProps } from '@/types'
+import { introProps } from '@/types'
 
-const VideoSection: React.FC<VideoSectionProps> = ({
-  videoSrc,
-  thumbnail,
-  sectionTitle
-}) => {
+const Intro: React.FC<introProps> = ({ videoSrc, thumbnail, sectionTitle }) => {
   return (
     <>
       <div className="mb-8">
@@ -29,4 +25,4 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   )
 }
 
-export default VideoSection
+export default Intro

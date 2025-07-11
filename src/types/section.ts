@@ -2,18 +2,20 @@ import { ReactNode } from 'react'
 import { BaseSectionProps, Spacing } from './common'
 import { CardListItem, CardData } from './card'
 import { CarouselData, Video } from './media'
+import { FormField } from './form'
+import { ButtonProps } from './ui'
+import { AccordionItem } from './layout'
 
 // Props para seções específicas
-export interface BrandIntentionSectionProps extends BaseSectionProps {
+export interface BenefitsProps extends BaseSectionProps {
   listItems?: CardListItem[]
 }
 
-export interface ChooseSectionProps extends BaseSectionProps {
+export interface ComparisonProps extends BaseSectionProps {
   cardsData: CardData[]
 }
 
-export interface SectionDiffProps extends BaseSectionProps {
-  sectionTitle: string | ReactNode
+export interface DifferenceProps extends BaseSectionProps {
   cardDarkTitle: string
   cardDarkListItems: string[]
   cardDarkDescription: ReactNode
@@ -28,33 +30,44 @@ export interface HeroProps extends BaseSectionProps {
   descriptionText: string
 }
 
-export interface ImageCarouselSectionProps extends BaseSectionProps {
+export interface ExamplesProps extends BaseSectionProps {
   carousels: CarouselData[]
   sectionClassName?: string
   spacing?: Spacing
 }
 
-export interface ProcessStepsSectionProps extends BaseSectionProps {
+export interface StepsProps extends BaseSectionProps {
   descriptionText: string
   timelineItems: string[]
 }
 
-export interface VideoCarouselSectionProps extends BaseSectionProps {
+export interface TestimonialsProps extends BaseSectionProps {
   videos: Video[]
   titleColor?: string
 }
 
-export interface VideoSectionProps extends BaseSectionProps {
+export interface IntroProps extends BaseSectionProps {
   videoSrc: string
   thumbnail: string
 }
 
-export interface AccordionSectionProps {
+export interface DeliverablesProps {
   className?: string
   sectionTitle: string | ReactNode
   descriptionText: string | ReactNode
-  accordionItems: Array<{
-    title: string
-    content: React.ReactNode
-  }>
+  accordionItems: AccordionItem[]
+}
+
+export interface ContactProps {
+  sectionTitle: string | ReactNode
+  descriptionText: string
+  fields: FormField[]
+  submitButtonText: string
+  onSubmit: (formData: Record<string, string>) => void
+  formTitle?: string
+  buttonProps?: Partial<ButtonProps>
+  formChildren?: ReactNode
+  className?: string
+  formClassName?: string
+  security?: string
 }

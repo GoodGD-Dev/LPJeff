@@ -2,9 +2,9 @@ import React from 'react'
 import Title from '@ui/Title'
 import Card from '@/ui/Card'
 import XIcon from '@ui/Svgs'
-import { SectionDiffProps } from '@/types'
+import { DifferenceProps } from '@/types'
 
-const SectionDiff: React.FC<SectionDiffProps> = ({
+const Difference: React.FC<DifferenceProps> = ({
   className = '',
   sectionTitle,
   cardDarkTitle,
@@ -22,7 +22,7 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
       </div>
 
       {/* Cards de comparação */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-center max-w-4xl mx-auto">
         {/* Card Dark*/}
         <Card
           variant="dark"
@@ -45,4 +45,4 @@ const SectionDiff: React.FC<SectionDiffProps> = ({
   )
 }
 
-export default SectionDiff
+export default Difference

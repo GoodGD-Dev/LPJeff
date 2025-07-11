@@ -1,6 +1,5 @@
-import React, { useState, FormEvent, ReactNode } from 'react'
-import Input from '@ui/Input'
-import Button from '@ui/Button'
+import React, { useState, FormEvent } from 'react'
+import { Button, Input } from '@ui'
 import { FormProps } from '@types'
 
 const Form: React.FC<FormProps> = ({

@@ -36,6 +36,12 @@
       "@components/*": [
         "src/components/*"
       ],
+      "@constants": [
+        "src/constants"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
       "@layouts": [
         "src/layouts"
       ],
@@ -53,6 +59,12 @@
       ],
       "@routes/*": [
         "src/routes/*"
+      ],
+      "@sections": [
+        "src/sections"
+      ],
+      "@sections/*": [
+        "src/sections/*"
       ],
       "@styles": [
         "src/styles"

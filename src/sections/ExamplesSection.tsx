@@ -1,9 +1,9 @@
 import React from 'react'
 import Title from '@ui/Title'
 import ImageCarousel from '@components/ImageCarousel'
-import { ImageCarouselSectionProps } from '@/types'
+import { ExamplesProps } from '@/types'
 
-const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
+const Examples: React.FC<ExamplesProps> = ({
   sectionTitle,
   carousels,
   sectionClassName = '',
@@ -41,4 +41,4 @@ const ImageCarouselSection: React.FC<ImageCarouselSectionProps> = ({
   )
 }
 
-export default ImageCarouselSection
+export default Examples

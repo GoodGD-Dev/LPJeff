@@ -1,24 +1,10 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
-import { ButtonProps } from '@/types/ui'
 import Form from '@/components/Form'
-import { FormField } from '@/types'
+import { ContactProps } from '@/types'
 
-interface FormSectionProps {
-  sectionTitle: string
-  descriptionText: string
-  fields: FormField[]
-  submitButtonText: string
-  onSubmit: (formData: Record<string, string>) => void
-  formTitle?: string
-  buttonProps?: Partial<ButtonProps>
-  formChildren?: React.ReactNode
-  className?: string
-  formClassName?: string
-}
-
-const FormSection: React.FC<FormSectionProps> = ({
+const Contact: React.FC<ContactProps> = ({
   sectionTitle,
   descriptionText,
   fields,
@@ -27,6 +13,7 @@ const FormSection: React.FC<FormSectionProps> = ({
   formTitle,
   buttonProps,
   formChildren,
+  security,
   className = '',
   formClassName = ''
 }) => {
@@ -41,7 +28,7 @@ const FormSection: React.FC<FormSectionProps> = ({
 
       {/* Descriptive Text */}
       <div className="mb-10">
-        <Text size="lg" align="center" color="">
+        <Text align="center" color="">
           {descriptionText}
         </Text>
       </div>
@@ -57,8 +44,14 @@ const FormSection: React.FC<FormSectionProps> = ({
       >
         {formChildren}
       </Form>
+
+      <div className="py-8">
+        <Text align="center" size="xs">
+          {security}
+        </Text>
+      </div>
     </>
   )
 }
 
-export default FormSection
+export default Contact

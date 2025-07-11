@@ -1,17 +1,11 @@
 import { ReactNode } from 'react'
 
-// Tipos para layout e estrutura
+// Interfaces de dados de layout
 export interface Section {
   id: string
   content: ReactNode
 }
 
-export interface MainLayoutProps {
-  sections?: Section[]
-  children?: ReactNode
-}
-
-// Tipos para componentes de timeline
 export interface TimelineColors {
   activeCircle: string
   inactiveCircle: string
@@ -19,6 +13,22 @@ export interface TimelineColors {
   inactiveLine: string
   activeText: string
   inactiveText: string
+}
+
+export interface AccordionItem {
+  title: string
+  icon?: ReactNode
+  content: ReactNode
+  backgroundColor?: string
+  titleColor?: string
+  contentColor?: string
+  hoverColor?: string
+}
+
+// Props para componentes de layout
+export interface MainLayoutProps {
+  sections?: Section[]
+  children?: ReactNode
 }
 
 export interface TimelineListProps {

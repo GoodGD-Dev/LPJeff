@@ -3,7 +3,7 @@ import Title from '@ui/Title'
 import Text from '@ui/Text'
 import { HeroProps } from '@/types'
 
-const InvestSection: React.FC<HeroProps> = ({
+const Call: React.FC<HeroProps> = ({
   heroImage,
   className = '',
   sectionTitle,
@@ -15,7 +15,7 @@ const InvestSection: React.FC<HeroProps> = ({
       <div className="flex justify-center mb-8">
         <img
           src={heroImage}
-          alt="Imagem InvestSection"
+          alt="Imagem Call"
           className="w-full max-w-md h-64 object-fit rounded-lg"
         />
       </div>
@@ -35,4 +35,4 @@ const InvestSection: React.FC<HeroProps> = ({
   )
 }
 
-export default InvestSection
+export default Call

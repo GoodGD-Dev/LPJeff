@@ -13,8 +13,31 @@ export interface BaseSectionProps extends BaseProps {
   sectionTitle: ReactNode
 }
 
-// Tipos para variações de componentes
+// Tipos de variação
 export type Variant = 'dark' | 'light'
+export type Spacing = 'default' | 'sm' | 'md' | 'lg' | 'xl'
+export type TextAlign = 'left' | 'center' | 'right'
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'span'
+export type TextTag = 'p' | 'span' | 'li'
+export type AspectRatio = '1:1' | '16:9' | '9:16'
+export type Position =
+  | 'bottom-right'
+  | 'bottom-left'
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-center'
+  | 'top-center'
+  | 'center'
+
+export type Leading =
+  | 'none'
+  | 'tight'
+  | 'snug'
+  | 'normal'
+  | 'relaxed'
+  | 'loose'
+  | string
 
 export type IconType =
   | 'x'
@@ -35,21 +58,13 @@ export type IconType =
   | 'certificate'
   | 'certificate2'
   | 'arrow'
+  | 'phone'
 
-export type Spacing = 'default' | 'sm' | 'md' | 'lg' | 'xl'
-export type TextAlign = 'left' | 'center' | 'right'
-export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'span'
-export type TextTag = 'p' | 'span' | 'li'
-export type AspectRatio = '1:1' | '16:9' | '9:16'
-export type ButtonSize = 'sm' | 'md' | 'lg'
-
-export type Leading =
-  | 'none'
-  | 'tight'
-  | 'snug'
-  | 'normal'
-  | 'relaxed'
-  | 'loose'
-  | string
+export type FormFieldType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'textarea'
+  | 'select'
+export type InputVariant = 'default' | 'larger'

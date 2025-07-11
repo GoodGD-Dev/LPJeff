@@ -1,16 +1,16 @@
 import React from 'react'
 import Title from '@ui/Title'
 import VideoCarouselModal from '@/components/VideoCarousel'
-import { VideoCarouselSectionProps } from '@/types'
+import { TestimonialsProps } from '@/types'
 
-const VideoCarouselSection: React.FC<VideoCarouselSectionProps> = ({
+const Testimonials: React.FC<TestimonialsProps> = ({
   videos,
   sectionTitle
 }) => {
   return (
     <>
       {/* Título principal */}
-      <div className="mb-8">
+      <div>
         <Title>{sectionTitle}</Title>
       </div>
 
@@ -21,4 +21,4 @@ const VideoCarouselSection: React.FC<VideoCarouselSectionProps> = ({
   )
 }
 
-export default VideoCarouselSection
+export default Testimonials

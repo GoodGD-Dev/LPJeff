@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AccordionItem from '@ui/AccordionItem'
+import { AccordionItem } from '@ui'
 import { AccordionProps } from '@types'
 
 const Accordion: React.FC<AccordionProps> = ({

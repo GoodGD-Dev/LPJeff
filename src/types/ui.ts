@@ -1,76 +1,16 @@
 import { ReactNode } from 'react'
 import {
   IconType,
+  Size,
   TextAlign,
-  TextSize,
-  TitleSize,
   HeadingTag,
   TextTag,
   Leading,
-  ButtonSize
+  Position
 } from './common'
-import { CardListItem } from './card'
+import { AccordionItem } from './layout'
 
-// Props para componentes de interface
-export interface AccordionProps {
-  allowMultipleOpen?: boolean
-  items: {
-    title: string
-    icon?: ReactNode
-    content: ReactNode
-    backgroundColor?: string
-    titleColor?: string
-    contentColor?: string
-    hoverColor?: string
-  }[]
-}
-
-export interface AccordionItemProps {
-  title: string
-  icon?: ReactNode
-  children: ReactNode
-  index: number
-  openIndex: number | null
-  setOpenIndex: (index: number | null) => void
-  backgroundColor?: string
-  openBackgroundColor?: string
-  iconColor?: string
-  openTitleColor?: string
-  openContentColor?: string
-  titleColor?: string
-  contentColor?: string
-  hoverColor?: string
-}
-
-export interface ButtonProps {
-  children?: React.ReactNode
-  icon?: React.ReactNode
-  bgColor?: string
-  textColor?: string
-  size?: 'sm' | 'md' | 'lg'
-  expanded?: boolean
-  disabled?: boolean
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-  className?: string
-  targetSection?: string // ID da seção para navegar
-  fixed?: boolean // Se o botão deve ser fixo
-  position?:
-    | 'bottom-right'
-    | 'bottom-left'
-    | 'top-right'
-    | 'top-left'
-    | 'bottom-center'
-    | 'top-center'
-    | 'center'
-
-  hideOnSection?: boolean // Se deve ocultar quando estiver na seção de destino
-}
-
-export interface CardListProps {
-  items: CardListItem[]
-  className?: string
-}
-
+// Props para componentes básicos de UI
 export interface IconProps {
   type: IconType
   className?: string
@@ -84,7 +24,7 @@ export interface TextProps {
   bulletColor?: string
   uppercase?: boolean
   lowercase?: boolean
-  size?: TextSize
+  size?: Size
   align?: TextAlign
   expanded?: boolean
   leading?: Leading
@@ -98,8 +38,40 @@ export interface TitleProps {
   uppercase?: boolean
   lowercase?: boolean
   bold?: boolean
-  size?: TitleSize
+  size?: Size
   align?: TextAlign
   expanded?: boolean
   className?: string
+}
+
+export interface ButtonProps {
+  children?: ReactNode
+  icon?: ReactNode
+  bgColor?: string
+  textColor?: string
+  size?: Size
+  expanded?: boolean
+  disabled?: boolean
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  className?: string
+  targetSection?: string
+  fixed?: boolean
+  position?: Position
+  hideOnSection?: boolean
+}
+
+// Props para componentes de accordion
+export interface AccordionProps {
+  allowMultipleOpen?: boolean
+  items: AccordionItem[]
+}
+
+export interface AccordionItemProps extends AccordionItem {
+  index: number
+  openIndex: number | null
+  setOpenIndex: (index: number | null) => void
+  openBackgroundColor?: string
+  iconColor?: string
+  openTitleColor?: string
+  openContentColor?: string
 }

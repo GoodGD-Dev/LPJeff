@@ -1,11 +1,11 @@
-import { BrandIntentionSectionProps, CardListItem } from '@/types'
+import { BenefitsProps, CardListItem } from '@/types'
 import Icon from '@/ui/Svgs'
 import CardList from '@components/CardList'
 import Title from '@ui/Title'
 import React from 'react'
 
 // Seção principal
-const BrandIntentionSection: React.FC<BrandIntentionSectionProps> = ({
+const Benefits: React.FC<BenefitsProps> = ({
   sectionTitle,
   listItems: propListItems
 }) => {
@@ -56,4 +56,4 @@ const BrandIntentionSection: React.FC<BrandIntentionSectionProps> = ({
   )
 }
 
-export default BrandIntentionSection
+export default Benefits
