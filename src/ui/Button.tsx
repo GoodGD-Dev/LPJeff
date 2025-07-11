@@ -38,6 +38,13 @@ const Button: React.FC<ButtonProps> = ({
 
   // Mapeamento de tamanhos
   const sizeClasses = {
+    xs: {
+      width: 'w-56', // 224px
+      height: 'h-8', // 32px
+      padding: 'px-2 py-1.5',
+      text: 'text-xs', // 12px
+      radius: 'rounded-2xl'
+    },
     sm: {
       width: 'w-64', // 256px
       height: 'h-9', // 36px
@@ -57,6 +64,13 @@ const Button: React.FC<ButtonProps> = ({
       height: 'h-12', // 48px
       padding: 'px-6 py-3',
       text: 'text-lg', // 18px
+      radius: 'rounded-3xl'
+    },
+    xl: {
+      width: 'w-112', // 448px (ou use w-[28rem])
+      height: 'h-14', // 56px
+      padding: 'px-8 py-3.5',
+      text: 'text-xl', // 20px
       radius: 'rounded-3xl'
     }
   }

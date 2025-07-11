@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import {
   IconType,
   Size,
+  ButtonSize,
   TextAlign,
   HeadingTag,
   TextTag,
@@ -49,7 +50,7 @@ export interface ButtonProps {
   icon?: ReactNode
   bgColor?: string
   textColor?: string
-  size?: Size
+  size?: ButtonSize
   expanded?: boolean
   disabled?: boolean
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -66,12 +67,19 @@ export interface AccordionProps {
   items: AccordionItem[]
 }
 
-export interface AccordionItemProps extends AccordionItem {
+export interface AccordionItemProps {
+  title: string
+  icon?: ReactNode
+  children: ReactNode
   index: number
   openIndex: number | null
   setOpenIndex: (index: number | null) => void
+  backgroundColor?: string
   openBackgroundColor?: string
   iconColor?: string
   openTitleColor?: string
   openContentColor?: string
+  titleColor?: string
+  contentColor?: string
+  hoverColor?: string
 }

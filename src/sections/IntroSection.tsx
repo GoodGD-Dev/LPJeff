@@ -1,9 +1,9 @@
 import React from 'react'
 import Title from '@ui/Title'
 import VideoPlayer from '@ui/VideoModal'
-import { introProps } from '@/types'
+import { IntroProps } from '@/types'
 
-const Intro: React.FC<introProps> = ({ videoSrc, thumbnail, sectionTitle }) => {
+const Intro: React.FC<IntroProps> = ({ videoSrc, thumbnail, sectionTitle }) => {
   return (
     <>
       <div className="mb-8">
