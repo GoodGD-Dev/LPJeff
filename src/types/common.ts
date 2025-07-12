@@ -22,6 +22,7 @@ export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'span'
 export type TextTag = 'p' | 'span' | 'li'
 export type AspectRatio = '1:1' | '16:9' | '9:16'
+
 export type Position =
   | 'bottom-right'
   | 'bottom-left'
@@ -68,4 +69,5 @@ export type FormFieldType =
   | 'number'
   | 'textarea'
   | 'select'
+
 export type InputVariant = 'default' | 'larger'

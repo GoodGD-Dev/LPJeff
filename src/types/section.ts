@@ -57,17 +57,3 @@ export interface DeliverablesProps {
   descriptionText: string | ReactNode
   accordionItems: AccordionItem[]
 }
-
-export interface ContactProps {
-  sectionTitle: string | ReactNode
-  descriptionText: string
-  fields: FormField[]
-  submitButtonText: string
-  onSubmit: (formData: Record<string, string>) => void
-  formTitle?: string
-  buttonProps?: Partial<ButtonProps>
-  formChildren?: ReactNode
-  className?: string
-  formClassName?: string
-  security?: string
-}

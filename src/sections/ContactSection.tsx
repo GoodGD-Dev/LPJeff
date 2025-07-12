@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Title from '@ui/Title'
 import Text from '@ui/Text'
 import Form from '@/components/Form'
@@ -15,7 +15,8 @@ const Contact: React.FC<ContactProps> = ({
   formChildren,
   security,
   className = '',
-  formClassName = ''
+  formClassName = '',
+  submitConfig
 }) => {
   return (
     <>
@@ -38,6 +39,7 @@ const Contact: React.FC<ContactProps> = ({
         title={formTitle}
         fields={fields}
         submitButtonText={submitButtonText}
+        submitConfig={submitConfig}
         onSubmit={onSubmit}
         buttonProps={buttonProps}
         className={formClassName}
@@ -55,3 +57,39 @@ const Contact: React.FC<ContactProps> = ({
 }
 
 export default Contact
+
+// Exemplo de uso com WhatsApp:
+/*
+const contactProps = {
+  sectionTitle: "Entre em Contato",
+  descriptionText: "Preencha o formulário e envie via WhatsApp",
+  fields: [
+    {
+      name: 'name',
+      type: 'text',
+      label: 'Nome',
+      placeholder: 'Digite seu nome'
+    },
+    {
+      name: 'email',
+      type: 'email',
+      label: 'Email',
+      placeholder: 'Digite seu email'
+    },
+    {
+      name: 'message',
+      type: 'textarea',
+      label: 'Mensagem',
+      placeholder: 'Digite sua mensagem'
+    }
+  ],
+  submitButtonText: "Enviar via WhatsApp",
+  submitConfig: {
+    type: 'whatsapp',
+    phoneNumber: '5511999999999', // Número com código do país
+    messageTemplate: 'Olá! Meu nome é {name}, meu email é {email} e gostaria de falar sobre: {message}'
+    // Ou deixe sem messageTemplate para usar o formato padrão
+  },
+  security: "Seus dados estão seguros conosco"
+}
+*/

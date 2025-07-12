@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useRouter } from './index'
 import Home from '@pages/Home'
 import NotFoundPage from '@pages/NotFoundPage'
-import { TestPage } from '@/pages/Test'
 
 interface RouteConfig {
   path: string
@@ -15,11 +14,6 @@ const routesConfig: RouteConfig[] = [
     path: '/',
     component: Home,
     title: 'Home - Sua Marca por Intenção'
-  },
-  {
-    path: '/test',
-    component: TestPage,
-    title: 'Test - Sua Marca por Intenção'
   }
 ]
 

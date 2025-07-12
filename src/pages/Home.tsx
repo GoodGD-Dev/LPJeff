@@ -37,8 +37,10 @@ import {
   cardList,
   listVideos,
   video,
-  lists
+  lists,
+  emailConfig
 } from '@constants'
+import { submitConfig } from '@/config/submitConfig'
 
 const Home: React.FC = () => {
   const sections = [
@@ -142,6 +144,7 @@ const Home: React.FC = () => {
           onSubmit={handleMyFormSubmit}
           buttonProps={formBtn.props}
           security={contact.security}
+          submitConfig={submitConfig}
         />
       )
     }

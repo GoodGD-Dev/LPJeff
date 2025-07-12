@@ -1,5 +1,11 @@
-import { FormField } from '@types'
+import { EmailFormConfig, FormField } from '@types'
 import { Icon } from '@ui'
+
+export const emailConfig: EmailFormConfig = {
+  type: 'email',
+  recipientEmail: 'contato@seusite.com',
+  emailSubject: 'Novo contato do formulário'
+}
 
 export const myFormFields: FormField[] = [
   {
