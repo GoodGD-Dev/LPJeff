@@ -41,7 +41,7 @@ export const myFormFields: FormField[] = [
     variant: 'default'
   },
   {
-    name: 'challengeDescription',
+    name: 'message',
     label: '',
     type: 'textarea',
     placeholder:
@@ -60,12 +60,4 @@ export const formBtn = {
   }
 }
 
-export const handleMyFormSubmit = (data: Record<string, string>) => {
-  console.log('Dados do formulário submetidos:', data)
-  alert('Formulário enviado com sucesso! Verifique o console para os dados.')
-  console.log(`Nome: ${data.name}`)
-  console.log(`Email: ${data.email}`)
-  console.log(`WhatsApp: ${data.whatsapp}`)
-  console.log(`Instagram: ${data.instagram}`)
-  console.log(`Desafio: ${data.challengeDescription}`)
-}
+export const handleMyFormSubmit = (data: Record<string, string>) => {}

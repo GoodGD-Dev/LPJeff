@@ -1,12 +1,11 @@
-// submitConfig.ts
 import { WhatsAppSubmitConfig } from '@types'
 
 // Configuração para WhatsApp
 export const submitConfig: WhatsAppSubmitConfig = {
   type: 'whatsapp',
-  phoneNumber: '55519999999', // Número com código do país
+  phoneNumber: '5551986485232',
   messageTemplate:
-    'Olá! Meu nome é {name}, meu email é {email} e gostaria de falar sobre: {message}'
+    'Olá! Meu nome é {name}, meu email é {email} e meu @ eh {instagram} e gostaria de falar sobre: {message}'
 }
 
 // Configuração alternativa para email (se precisar)

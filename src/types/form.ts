@@ -50,6 +50,8 @@ export interface ContactProps {
   className?: string
   formClassName?: string
   submitConfig: EmailSubmitConfig | WhatsAppSubmitConfig
+  successMessage?: string
+  successTitle?: string
 }
 
 // Tipos específicos para cada tipo de formulário
@@ -108,4 +110,6 @@ export interface EnhancedFormProps
   fields: EnhancedFormField[]
   submitConfig: EmailSubmitConfig | WhatsAppSubmitConfig
   onSubmit?: (formData: Record<string, string>) => void
+  successMessage?: string
+  successTitle?: string
 }

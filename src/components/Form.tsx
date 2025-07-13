@@ -15,7 +15,9 @@ const Form: React.FC<EnhancedFormProps> = ({
   title,
   buttonProps,
   children,
-  className = ''
+  className = '',
+  successMessage = 'Formulário enviado com sucesso!',
+  successTitle = 'Obrigado!'
 }) => {
   const [formData, setFormData] = useState<Record<string, string>>(() => {
     const initialData: Record<string, string> = {}
@@ -26,6 +28,7 @@ const Form: React.FC<EnhancedFormProps> = ({
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -110,6 +113,12 @@ const Form: React.FC<EnhancedFormProps> = ({
         document.body.appendChild(form)
         form.submit()
         document.body.removeChild(form)
+
+        // Para email, aguarda um pouco antes de mostrar sucesso
+        setTimeout(() => {
+          setIsSuccess(true)
+          setIsSubmitting(false)
+        }, 1000)
       } else if (submitConfig.type === 'whatsapp') {
         const whatsappConfig = submitConfig as WhatsAppSubmitConfig
         const message = formatWhatsAppMessage(formData)
@@ -117,12 +126,70 @@ const Form: React.FC<EnhancedFormProps> = ({
         const whatsappUrl = `https://wa.me/${whatsappConfig.phoneNumber}?text=${encodedMessage}`
 
         window.open(whatsappUrl, '_blank')
+
+        // Para WhatsApp, mostra sucesso imediatamente após abrir
+        setTimeout(() => {
+          setIsSuccess(true)
+          setIsSubmitting(false)
+        }, 500)
       }
     } catch (error) {
       console.error('Erro ao enviar formulário:', error)
-    } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleNewSubmission = () => {
+    setIsSuccess(false)
+    setFormData(() => {
+      const initialData: Record<string, string> = {}
+      fields.forEach((field) => {
+        initialData[field.name] = field.initialValue || ''
+      })
+      return initialData
+    })
+  }
+
+  // Tela de sucesso
+  if (isSuccess) {
+    return (
+      <div
+        className={`flex flex-col items-center justify-center gap-6 text-center ${className}`}
+      >
+        <div className="flex flex-col items-center gap-4">
+          {/* Ícone de sucesso */}
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+            <svg
+              className="w-8 h-8 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          {/* Título de sucesso */}
+          <h2 className="text-3xl font-bold text-text">{successTitle}</h2>
+
+          {/* Mensagem de sucesso */}
+          <p className="text-text-muted text-lg max-w-md">{successMessage}</p>
+
+          {/* Botão para enviar novamente (opcional) */}
+          <Button
+            onClick={handleNewSubmission}
+            className="mt-4 border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50"
+          >
+            Enviar outro formulário
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -150,6 +217,7 @@ const Form: React.FC<EnhancedFormProps> = ({
                 placeholder={field.placeholder}
                 value={formData[field.name]}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 className={`
                   flex
                   gap-6
@@ -166,6 +234,7 @@ const Form: React.FC<EnhancedFormProps> = ({
                   min-h-[100px]
                   text-text-muted
                   resize-none
+                  ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
                   ${field.className || ''}
                 `}
                 rows={4}
@@ -186,6 +255,7 @@ const Form: React.FC<EnhancedFormProps> = ({
                 name={field.name}
                 value={formData[field.name]}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 className={`
                   flex
                   gap-6
@@ -200,6 +270,7 @@ const Form: React.FC<EnhancedFormProps> = ({
                   w-full
                   appearance-none
                   pr-8
+                  ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
                   ${field.className || ''}
                 `}
               >
@@ -219,8 +290,9 @@ const Form: React.FC<EnhancedFormProps> = ({
               placeholder={field.placeholder}
               value={formData[field.name]}
               onChange={handleChange}
-              className={field.className}
-              {...(field.inputProps || {})} // Spread das props extras, incluindo variant
+              disabled={isSubmitting}
+              className={`${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''} ${field.className || ''}`}
+              {...(field.inputProps || {})}
             />
           )}
         </div>
@@ -230,32 +302,17 @@ const Form: React.FC<EnhancedFormProps> = ({
         className={`${buttonProps?.className || ''} mx-auto`}
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Enviando...' : submitButtonText}
+        {isSubmitting ? (
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            Enviando...
+          </div>
+        ) : (
+          submitButtonText
+        )}
       </Button>
     </form>
   )
 }
 
 export default Form
-
-// Exemplo de uso com variant:
-/*
-const fieldsWithVariant = [
-  {
-    name: 'name',
-    type: 'text',
-    label: 'Nome',
-    placeholder: 'Digite seu nome',
-    inputProps: {
-      variant: 'outlined' // ou qualquer variant válido do seu Input
-    }
-  },
-  {
-    name: 'email',
-    type: 'email',
-    label: 'Email',
-    placeholder: 'Digite seu email'
-    // sem inputProps = sem variant
-  }
-]
-*/
