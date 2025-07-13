@@ -4,33 +4,6 @@ import { ImageCarouselProps } from '@types'
 import { Icon } from '@ui'
 import 'keen-slider/keen-slider.min.css'
 
-// Navigation Icons
-const ChevronLeftIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M15 18l-6-6 6-6" />
-  </svg>
-)
-
-const ChevronRightIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M9 18l6-6-6-6" />
-  </svg>
-)
-
 const ImageCarousel: React.FC<ImageCarouselProps> = ({
   images,
   showModal = true,
@@ -107,27 +80,22 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
       {canGoPrev && (
         <button
           onClick={goToPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-40 hover:bg-secondary text-primary
-                     p-3 rounded-full transition-all duration-300
-                     focus:outline-none
-                     opacity-70 hover:opacity-100"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-40 text-primary
+                     p-3 rounded-full transition-all duration-300 w-16 h-16"
           aria-label="Imagem anterior"
         >
-          <Icon type="arrow" className="w-5 h-5 scale-x-[-1]" />
+          <Icon type="arrow" className="scale-x-[-1]" />
         </button>
       )}
 
       {canGoNext && (
         <button
           onClick={goToNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-40
-                     hover:bg-secondary text-primary
-                     p-3 rounded-full transition-all duration-300
-                     focus:outline-none
-                     opacity-70 hover:opacity-100"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-40 text-primary
+                     p-3 rounded-full transition-all duration-300 w-16 h-16"
           aria-label="Próxima imagem"
         >
-          <Icon type="arrow" className="w-9 h-4" />
+          <Icon type="arrow" />
         </button>
       )}
 
